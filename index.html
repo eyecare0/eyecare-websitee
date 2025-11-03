@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phòng Chống Cận Thị Học Đường</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom, #eaf8ff, #ffffff);
+      color: #333;
+    }
+    header {
+      background-color: #0099cc;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+    }
+    nav {
+      background-color: #e3f2fd;
+      text-align: center;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav a {
+      color: #0077aa;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 15px;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ff6600;
+    }
+    section {
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      color: #0077aa;
+      border-bottom: 2px solid #0077aa;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    button {
+      background-color: #0077aa;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #005f80;
+    }
+    .chart {
+      font-size: 2em;
+      text-align: center;
+      margin-top: 30px;
+      letter-spacing: 10px;
+    }
+    footer {
+      text-align: center;
+      background-color: #0099cc;
+      color: white;
+      padding: 15px;
+      margin-top: 40px;
+    }
+    .reminder {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+      padding: 10px;
+      text-align: center;
+      margin: 20px auto;
+      width: 80%;
+      border-radius: 5px;
+      display: none;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+    .quiz {
+      background-color: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #0077aa;
+    }
+    canvas {
+      display: block;
+      margin: 20px auto;
+    }
+
+    /* --- Cải tiến phần giới thiệu --- */
+    .intro-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .intro-text {
+      flex: 1 1 450px;
+    }
+
+    .intro-text h3 {
+      color: #005f80;
+      font-weight: 600;
+      margin-top: 5px;
+    }
+
+    .intro-text p {
+      line-height: 1.6;
+    }
+
+    .intro-text ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .intro-image {
+      flex: 1 1 350px;
+      text-align: center;
+    }
+
+    .intro-image img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.4s ease;
+    }
+
+    .intro-image img:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive cho điện thoại */
+    @media (max-width: 700px) {
+      .intro-content {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .intro-text ul {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>PHÒNG CHỐNG CẬN THỊ HỌC ĐƯỜNG</h1>
+    <p>Website tuyên truyền, kiểm tra và hỗ trợ chăm sóc mắt cho học sinh</p>
+  </header>
+
+  <nav>
+    <a href="#home">Trang chủ</a>
+    <a href="#info">Kiến thức</a>
+    <a href="#test">Kiểm tra thị lực</a>
+    <a href="#exercise">Bài tập mắt</a>
+    <a href="#quiz">Câu hỏi</a>
+    <a href="#stats">Thống kê</a>
+  </nav>
+
+  <div class="reminder" id="reminder">
+    ⏱️ Đã 20 phút rồi! Hãy nhìn xa 20 giây để cho mắt nghỉ nhé! 👀
+  </div>
+
+  <!-- 🌿 GIỚI THIỆU (phiên bản cải tiến) -->
+   <section id="home" class="intro">
+  <div class="intro-content">
+    <div class="intro-text">
+      <h2>🌿 Giới thiệu</h2>
+      <h3>Chăm sóc đôi mắt – Bảo vệ tương lai học đường 👓</h3>
+      <p>
+        Cận thị học đường đang ngày càng phổ biến ở học sinh Việt Nam. 
+        Theo thống kê của Bộ Y tế, có đến <b>40–60% học sinh ở các thành phố lớn</b> bị cận thị, 
+        và con số này vẫn đang tăng nhanh do việc sử dụng thiết bị điện tử quá nhiều, 
+        ngồi học sai tư thế hoặc thiếu ánh sáng học tập.
+      </p>
+      <p>
+        Đôi mắt không chỉ là cửa sổ tâm hồn, mà còn là “cánh cửa tri thức” giúp các em học tập, vui chơi và sáng tạo. 
+        Vì vậy, việc chăm sóc và bảo vệ đôi mắt ngay từ khi còn trên ghế nhà trường là vô cùng quan trọng.
+      </p>
+      <p>
+        Website <b>“Phòng Chống Cận Thị Học Đường”</b> được xây dựng nhằm giúp học sinh, giáo viên và phụ huynh:
+      </p>
+      <ul>
+        <li>📘 Hiểu rõ <b>nguyên nhân</b> và <b>cách phòng tránh cận thị</b>.</li>
+        <li>👁️ Tự kiểm tra <b>thị lực tại nhà</b> bằng công cụ đơn giản.</li>
+        <li>🧘 Tập luyện <b>bài tập thư giãn mắt</b> giúp giảm mỏi và điều tiết tốt hơn.</li>
+        <li>🧠 Làm bài <b>trắc nghiệm kiến thức</b> để củng cố hiểu biết.</li>
+        <li>📊 Theo dõi <b>thống kê kết quả</b> để đánh giá quá trình học tập của bản thân.</li>
+      </ul>
+      <p>
+        Hãy cùng chúng tôi lan tỏa thông điệp:  
+        <b>“Mắt sáng – Học tốt – Tương lai rộng mở” 🌈</b>
+      </p>
+      <button onclick="document.getElementById('info').scrollIntoView({behavior:'smooth'})">
+        Tìm hiểu thêm ⬇️
+      </button>
+    </div>
+
+    <div class="intro-image">
+      <img src="https://cdn.pixabay.com/photo/2016/03/09/15/10/eye-1245729_1280.jpg" alt="Đôi mắt khỏe mạnh">
+      <p style="font-style: italic; color:#555; margin-top:10px;">
+        "Mỗi ngày dành 20 phút cho đôi mắt – bạn đang đầu tư cho cả tương lai của mình." 💖
+      </p>
+    </div>
+  </div>
+</section>
+  
+  <section id="info">
+    <h2>📘 Kiến thức về cận thị</h2>
+    <ul>
+      <li><b>Nguyên nhân:</b> Ngồi học quá gần, dùng điện thoại nhiều, thiếu ánh sáng.</li>
+      <li><b>Dấu hiệu:</b> Nhìn xa mờ, nheo mắt, nhức đầu khi nhìn bảng.</li>
+      <li><b>Phòng tránh:</b> Giữ khoảng cách 30–40cm, nghỉ mắt thường xuyên, ăn nhiều rau xanh, ngủ đủ giấc.</li>
+    </ul>
+    <img src="https://cdn.pixabay.com/photo/2017/06/20/19/20/glasses-2426182_1280.jpg" alt="Đeo kính đúng cách">
+  </section>
+
+  <section id="test">
+    <h2>👁️ Kiểm tra thị lực đơn giản</h2>
+    <p>Đứng cách màn hình 3 mét và đọc các dòng chữ dưới đây. Nếu không nhìn rõ dòng 4 trở lên, nên đi khám mắt.</p>
+    <button onclick="showChart()">Hiển thị bảng chữ</button>
+    <div id="chartArea" class="chart"></div>
+    <p id="result"></p>
+    <img src="https://cdn.pixabay.com/photo/2015/09/05/20/02/eye-test-925846_1280.jpg" alt="Kiểm tra thị lực">
+  </section>
+
+  <section id="exercise">
+    <h2>🧘 Bài tập thư giãn cho mắt</h2>
+    <ol>
+      <li><b>Quy tắc 20-20-20:</b> Mỗi 20 phút học, nhìn xa 20 giây.</li>
+      <li>Xoay tròng mắt 10 lần theo chiều kim đồng hồ, rồi ngược lại.</li>
+      <li>Nhắm mắt, massage nhẹ quanh mắt trong 1 phút.</li>
+      <li>Đi dạo ngoài trời 15 phút mỗi ngày.</li>
+    </ol>
+    <img src="https://cdn.pixabay.com/photo/2016/03/27/21/14/meditation-1287207_1280.jpg" alt="Thư giãn mắt">
+  </section>
+
+  <section id="quiz">
+    <h2>🧠 Câu hỏi trắc nghiệm kiến thức</h2>
+    <div class="quiz">
+      <div class="question">
+        <p>1️⃣ Cận thị là gì?</p>
+        <input type="radio" name="q1" value="Đúng"> Mắt nhìn xa bị mờ<br>
+        <input type="radio" name="q1" value="Sai"> Mắt nhìn gần bị mờ
+      </div>
+      <div class="question">
+        <p>2️⃣ Khoảng cách học tập đúng là bao nhiêu?</p>
+        <input type="radio" name="q2" value="Sai"> 10–20 cm<br>
+        <input type="radio" name="q2" value="Đúng"> 30–40 cm
+      </div>
+      <div class="question">
+        <p>3️⃣ Quy tắc 20-20-20 là gì?</p>
+        <input type="radio" name="q3" value="Đúng"> Cứ 20 phút học, nhìn xa 20 giây<br>
+        <input type="radio" name="q3" value="Sai"> Nghỉ 20 phút sau khi học 20 phút
+      </div>
+      <div class="question">
+        <p>4️⃣ Nên làm gì khi mỏi mắt?</p>
+        <input type="radio" name="q4" value="Đúng"> Nhắm mắt, massage nhẹ<br>
+        <input type="radio" name="q4" value="Sai"> Dụi mắt thật mạnh
+      </div>
+
+      <button onclick="checkQuiz()">Nộp bài</button>
+      <div class="result" id="quizResult"></div>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2016/11/29/05/08/eye-1869826_1280.jpg" alt="Hình minh họa thị lực">
+  </section>
+
+  <section id="stats">
+    <h2>📊 Thống kê kết quả trắc nghiệm</h2>
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <p id="statText"></p>
+    <img src="https://cdn.pixabay.com/photo/2016/11/19/14/00/statistics-1834974_1280.jpg" alt="Thống kê học sinh">
+  </section>
+
+  <footer>
+    © 2025 - Nhóm Dự án Khoa học Kỹ thuật | Email: duan.canthi@gmail.com
+  </footer>
+
+  <script>
+    // Hiển thị bảng chữ kiểm tra thị lực
+    function showChart() {
+      const letters = ["E", "F P", "T O Z", "L P E D", "P E C F D", "E D F C Z P", "F E L O P Z D"];
+      let html = "";
+      letters.forEach((line, i) => {
+        html += `<div style="font-size:${2 - i*0.2}em;">${line}</div>`;
+      });
+      document.getElementById("chartArea").innerHTML = html;
+      document.getElementById("result").innerText =
+        "👉 Nếu bạn không đọc rõ dòng thứ 4 trở lên, hãy đi khám mắt nhé!";
+    }
+
+    // Nhắc nhở 20-20-20
+    setInterval(() => {
+      const r = document.getElementById("reminder");
+      r.style.display = "block";
+      setTimeout(() => r.style.display = "none", 10000);
+    }, 1200000); // 20 phút
+
+    // Trắc nghiệm
+    function checkQuiz() {
+      const answers = {q1: "Đúng", q2: "Đúng", q3: "Đúng", q4: "Đúng"};
+      let score = 0;
+      for (let q in answers) {
+        const options = document.getElementsByName(q);
+        options.forEach(o => {
+          if (o.checked && o.value === answers[q]) score++;
+        });
+      }
+      const result = document.getElementById("quizResult");
+      result.innerHTML = `✅ Bạn đúng ${score}/4 câu.`;
+      saveResult(score);
+      drawChart();
+    }
+
+    // Lưu kết quả
+    function saveResult(score) {
+      let data = JSON.parse(localStorage.getItem("quizData")) || {pass: 0, fail: 0};
+      if (score >= 3) data.pass++;
+      else data.fail++;
+      localStorage.setItem("quizData", JSON.stringify(data));
+    }
+
+    // Vẽ biểu đồ thống kê
+    function drawChart() {
+      const data = JSON.parse(localStorage.getItem("quizData")) || {pass: 0, fail: 0};
+      const ctx = document.getElementById("myChart").getContext("2d");
+
+      ctx.clearRect(0, 0, 400, 200);
+      const total = data.pass + data.fail;
+      const passH = data.pass * 30;
+      const failH = data.fail * 30;
+
+      ctx.fillStyle = "#28a745";
+      ctx.fillRect(100, 180 - passH, 80, passH);
+      ctx.fillStyle = "#dc3545";
+      ctx.fillRect(250, 180 - failH, 80, failH);
+
+      ctx.fillStyle = "#000";
+      ctx.font = "16px sans-serif";
+      ctx.fillText("Đạt", 130, 195);
+      ctx.fillText("Chưa đạt", 250, 195);
+      ctx.fillText(`Tổng: ${total} học sinh`, 130, 20);
+
+      document.getElementById("statText").innerText =
+        `📈 ${data.pass} học sinh đạt yêu cầu và ${data.fail} học sinh cần ôn thêm.`;
+    }
+
+    window.onload = drawChart;
+  </script>
+</body>
+</html>
