@@ -238,15 +238,6 @@
     <img src="https://cdn.pixabay.com/photo/2017/06/20/19/20/glasses-2426182_1280.jpg" alt="Đeo kính đúng cách">
   </section>
 
-  <section id="test">
-    <h2>👁️ Kiểm tra thị lực đơn giản</h2>
-    <p>Đứng cách màn hình 3 mét và đọc các dòng chữ dưới đây. Nếu không nhìn rõ dòng 4 trở lên, nên đi khám mắt.</p>
-    <button onclick="showChart()">Hiển thị bảng chữ</button>
-    <div id="chartArea" class="chart"></div>
-    <p id="result"></p>
-    <img src="https://cdn.pixabay.com/photo/2015/09/05/20/02/eye-test-925846_1280.jpg" alt="Kiểm tra thị lực">
-  </section>
-
   <section id="exercise">
     <h2>🧘 Bài tập thư giãn cho mắt</h2>
     <ol>
@@ -297,20 +288,6 @@
 
   <footer>
     © 2025 - Nhóm Dự án Khoa học Kỹ thuật | Email: duan.canthi@gmail.com
-  </footer>
-
-  <script>
-    // Hiển thị bảng chữ kiểm tra thị lực
-    function showChart() {
-      const letters = ["E", "F P", "T O Z", "L P E D", "P E C F D", "E D F C Z P", "F E L O P Z D"];
-      let html = "";
-      letters.forEach((line, i) => {
-        html += `<div style="font-size:${2 - i*0.2}em;">${line}</div>`;
-      });
-      document.getElementById("chartArea").innerHTML = html;
-      document.getElementById("result").innerText =
-        "👉 Nếu bạn không đọc rõ dòng thứ 4 trở lên, hãy đi khám mắt nhé!";
-    }
 
     // Nhắc nhở 20-20-20
     setInterval(() => {
