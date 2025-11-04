@@ -56,12 +56,6 @@
     button:hover {
       background-color: #005f80;
     }
-    .chart {
-      font-size: 2em;
-      text-align: center;
-      margin-top: 30px;
-      letter-spacing: 10px;
-    }
     footer {
       text-align: center;
       background-color: #0099cc;
@@ -105,7 +99,7 @@
       margin: 20px auto;
     }
 
-    /* --- Cải tiến phần giới thiệu --- */
+    /* --- Giới thiệu --- */
     .intro-content {
       display: flex;
       flex-wrap: wrap;
@@ -156,13 +150,73 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Responsive cho điện thoại */
+    /* --- Kiến thức (1 thể) --- */
+    .info-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .info-text {
+      flex: 1 1 500px;
+      background: #f9fdff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      line-height: 1.7;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .info-text h3 {
+      color: #0077aa;
+      margin-top: 20px;
+    }
+
+    .info-text ul {
+      padding-left: 25px;
+      margin: 10px 0;
+    }
+
+    .quote-box {
+      margin-top: 20px;
+      background: #e0f7fa;
+      border-left: 5px solid #00acc1;
+      padding: 10px 15px;
+      border-radius: 8px;
+      color: #006064;
+      font-weight: 500;
+    }
+
+    .info-image {
+      flex: 1 1 350px;
+      text-align: center;
+    }
+
+    .info-image img {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.4s ease;
+    }
+
+    .info-image img:hover {
+      transform: scale(1.05);
+    }
+
+    /* --- Bài tập thư giãn --- */
+    ol li {
+      margin-bottom: 10px;
+    }
+
     @media (max-width: 700px) {
-      .intro-content {
+      .intro-content, .info-container {
         flex-direction: column-reverse;
         text-align: center;
       }
-      .intro-text ul {
+      .intro-text, .info-text {
         text-align: left;
       }
     }
@@ -172,13 +226,12 @@
 
   <header>
     <h1>PHÒNG CHỐNG CẬN THỊ HỌC ĐƯỜNG</h1>
-    <p>Website tuyên truyền, kiểm tra và hỗ trợ chăm sóc mắt cho học sinh</p>
+    <p>Website tuyên truyền, hướng dẫn và hỗ trợ chăm sóc mắt cho học sinh</p>
   </header>
 
   <nav>
     <a href="#home">Trang chủ</a>
     <a href="#info">Kiến thức</a>
-    <a href="#test">Kiểm tra thị lực</a>
     <a href="#exercise">Bài tập mắt</a>
     <a href="#quiz">Câu hỏi</a>
     <a href="#stats">Thống kê</a>
@@ -188,56 +241,85 @@
     ⏱️ Đã 20 phút rồi! Hãy nhìn xa 20 giây để cho mắt nghỉ nhé! 👀
   </div>
 
-  <!-- 🌿 GIỚI THIỆU (phiên bản cải tiến) -->
-   <section id="home" class="intro">
-  <div class="intro-content">
-    <div class="intro-text">
-      <h2>🌿 Giới thiệu</h2>
-      <h3>Chăm sóc đôi mắt – Bảo vệ tương lai học đường 👓</h3>
-      <p>
-        Cận thị học đường đang ngày càng phổ biến ở học sinh Việt Nam. 
-        Theo thống kê của Bộ Y tế, có đến <b>40–60% học sinh ở các thành phố lớn</b> bị cận thị, 
-        và con số này vẫn đang tăng nhanh do việc sử dụng thiết bị điện tử quá nhiều, 
-        ngồi học sai tư thế hoặc thiếu ánh sáng học tập.
-      </p>
-      <p>
-        Đôi mắt không chỉ là cửa sổ tâm hồn, mà còn là “cánh cửa tri thức” giúp các em học tập, vui chơi và sáng tạo. 
-        Vì vậy, việc chăm sóc và bảo vệ đôi mắt ngay từ khi còn trên ghế nhà trường là vô cùng quan trọng.
-      </p>
-      <p>
-        Website <b>“Phòng Chống Cận Thị Học Đường”</b> được xây dựng nhằm giúp học sinh, giáo viên và phụ huynh:
-      </p>
-      <ul>
-        <li>📘 Hiểu rõ <b>nguyên nhân</b> và <b>cách phòng tránh cận thị</b>.</li>
-        <li>👁️ Tự kiểm tra <b>thị lực tại nhà</b> bằng công cụ đơn giản.</li>
-        <li>🧘 Tập luyện <b>bài tập thư giãn mắt</b> giúp giảm mỏi và điều tiết tốt hơn.</li>
-        <li>🧠 Làm bài <b>trắc nghiệm kiến thức</b> để củng cố hiểu biết.</li>
-        <li>📊 Theo dõi <b>thống kê kết quả</b> để đánh giá quá trình học tập của bản thân.</li>
-      </ul>
-      <p>
-        Hãy cùng chúng tôi lan tỏa thông điệp:  
-        <b>“Mắt sáng – Học tốt – Tương lai rộng mở” 🌈</b>
-      </p>
-
-    <div class="intro-image">
-      <img src="https://share.google/images/uHOsrpxUH9ItvzErN" alt="Đôi mắt sáng khỏe mạnh">
-      <p style="font-style: italic; color:#555; margin-top:10px;">
-        "Mỗi ngày dành 20 phút cho đôi mắt – bạn đang đầu tư cho cả tương lai của mình." 💖
-      </p>
+  <!-- 🌿 Giới thiệu -->
+  <section id="home" class="intro">
+    <div class="intro-content">
+      <div class="intro-text">
+        <h2>🌿 Giới thiệu</h2>
+        <h3>Chăm sóc đôi mắt – Bảo vệ tương lai học đường 👓</h3>
+        <p>
+          Cận thị học đường đang ngày càng phổ biến ở học sinh Việt Nam. 
+          Theo thống kê, có đến <b>40–60% học sinh ở các thành phố lớn</b> bị cận thị,
+          và con số này vẫn tăng nhanh do việc sử dụng thiết bị điện tử quá nhiều, 
+          tư thế học sai hoặc thiếu ánh sáng học tập.
+        </p>
+        <p>
+          Đôi mắt không chỉ là cửa sổ tâm hồn, mà còn là “cánh cửa tri thức”. 
+          Vì vậy, việc chăm sóc và bảo vệ đôi mắt ngay từ khi còn trên ghế nhà trường là vô cùng quan trọng.
+        </p>
+        <ul>
+          <li>📘 Hiểu rõ nguyên nhân và cách phòng tránh cận thị.</li>
+          <li>🧘 Luyện tập các bài thư giãn mắt giúp giảm mỏi.</li>
+          <li>🧠 Làm bài trắc nghiệm để củng cố kiến thức.</li>
+          <li>📊 Theo dõi thống kê kết quả để đánh giá tiến bộ.</li>
+        </ul>
+        <p><b>“Mắt sáng – Học tốt – Tương lai rộng mở” 🌈</b></p>
+      </div>
+      <div class="intro-image">
+        <img src="https://cdn.pixabay.com/photo/2017/08/30/07/51/eye-2697557_1280.jpg" alt="Đôi mắt sáng khỏe mạnh">
+        <p style="font-style: italic; color:#555; margin-top:10px;">
+          "Mỗi ngày dành 20 phút cho đôi mắt – bạn đang đầu tư cho tương lai của mình." 💖
+        </p>
+      </div>
     </div>
-  </div>
-</section>
-  
-  <section id="info">
-    <h2>📘 Kiến thức về cận thị</h2>
-    <ul>
-      <li><b>Nguyên nhân:</b> Ngồi học quá gần, dùng điện thoại nhiều, thiếu ánh sáng.</li>
-      <li><b>Dấu hiệu:</b> Nhìn xa mờ, nheo mắt, nhức đầu khi nhìn bảng.</li>
-      <li><b>Phòng tránh:</b> Giữ khoảng cách 30–40cm, nghỉ mắt thường xuyên, ăn nhiều rau xanh, ngủ đủ giấc.</li>
-    </ul>
-    <img src="https://cdn.pixabay.com/photo/2017/06/20/19/20/glasses-2426182_1280.jpg" alt="Đeo kính đúng cách">
   </section>
 
+  <!-- 📘 Kiến thức -->
+  <section id="info">
+    <h2>📘 Kiến thức về cận thị học đường</h2>
+    <div class="info-container">
+      <div class="info-text">
+        <p>
+          Cận thị học đường là tình trạng <b>mắt không nhìn rõ các vật ở xa</b>, 
+          thường gặp ở học sinh do thói quen học tập và sinh hoạt chưa đúng. 
+          Tỉ lệ học sinh bị cận thị đang tăng nhanh tại Việt Nam, đặc biệt ở khu vực thành thị.
+        </p>
+
+        <h3>😵 Nguyên nhân</h3>
+        <ul>
+          <li>Ngồi học quá gần sách vở hoặc màn hình.</li>
+          <li>Dùng thiết bị điện tử lâu mà không nghỉ cho mắt.</li>
+          <li>Học trong phòng thiếu ánh sáng, tư thế sai.</li>
+          <li>Ít vận động ngoài trời.</li>
+        </ul>
+
+        <h3>👁️ Dấu hiệu nhận biết</h3>
+        <ul>
+          <li>Nhìn xa bị mờ, phải nheo mắt mới thấy rõ.</li>
+          <li>Hay nhức đầu, mỏi mắt khi đọc sách hoặc xem tivi.</li>
+          <li>Khó tập trung học tập do thị lực giảm.</li>
+        </ul>
+
+        <h3>🛡️ Cách phòng tránh</h3>
+        <ul>
+          <li>Giữ khoảng cách 30–40cm khi học hoặc sử dụng thiết bị.</li>
+          <li>Áp dụng quy tắc <b>20–20–20</b>: mỗi 20 phút, nhìn xa 20 giây.</li>
+          <li>Ăn uống đầy đủ chất, đặc biệt thực phẩm giàu vitamin A.</li>
+          <li>Thường xuyên ra ngoài trời, để mắt tiếp xúc ánh sáng tự nhiên.</li>
+        </ul>
+
+        <div class="quote-box">
+          💡 <i>“Đôi mắt sáng – Học tập hiệu quả – Tương lai tươi sáng”</i>
+        </div>
+      </div>
+      <div class="info-image">
+        <img src="https://cdn.pixabay.com/photo/2016/03/23/19/55/eye-1273903_1280.jpg" alt="Bảo vệ đôi mắt sáng khỏe">
+        <p style="font-style: italic; color:#555;">Học đúng cách – Nhìn xa hơn 🌈</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🧘 Bài tập -->
   <section id="exercise">
     <h2>🧘 Bài tập thư giãn cho mắt</h2>
     <ol>
@@ -249,6 +331,7 @@
     <img src="https://cdn.pixabay.com/photo/2016/03/27/21/14/meditation-1287207_1280.jpg" alt="Thư giãn mắt">
   </section>
 
+  <!-- 🧠 Câu hỏi -->
   <section id="quiz">
     <h2>🧠 Câu hỏi trắc nghiệm kiến thức</h2>
     <div class="quiz">
@@ -276,19 +359,20 @@
       <button onclick="checkQuiz()">Nộp bài</button>
       <div class="result" id="quizResult"></div>
     </div>
-    <img src="https://cdn.pixabay.com/photo/2016/11/29/05/08/eye-1869826_1280.jpg" alt="Hình minh họa thị lực">
   </section>
 
+  <!-- 📊 Thống kê -->
   <section id="stats">
     <h2>📊 Thống kê kết quả trắc nghiệm</h2>
     <canvas id="myChart" width="400" height="200"></canvas>
     <p id="statText"></p>
-    <img src="https://cdn.pixabay.com/photo/2016/11/19/14/00/statistics-1834974_1280.jpg" alt="Thống kê học sinh">
   </section>
 
   <footer>
     © 2025 - Nhóm Dự án Khoa học Kỹ thuật | Email: duan.canthi@gmail.com
+  </footer>
 
+  <script>
     // Nhắc nhở 20-20-20
     setInterval(() => {
       const r = document.getElementById("reminder");
@@ -324,7 +408,6 @@
     function drawChart() {
       const data = JSON.parse(localStorage.getItem("quizData")) || {pass: 0, fail: 0};
       const ctx = document.getElementById("myChart").getContext("2d");
-
       ctx.clearRect(0, 0, 400, 200);
       const total = data.pass + data.fail;
       const passH = data.pass * 30;
