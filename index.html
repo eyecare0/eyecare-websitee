@@ -530,13 +530,6 @@ function checkMyopia() {
   </div>
 </section>
 
-  <!-- 📊 Thống kê -->
-  <section id="stats">
-    <h2>📊 Thống kê kết quả trắc nghiệm</h2>
-    <canvas id="myChart" width="400" height="200"></canvas>
-    <p id="statText"></p>
-  </section>
-
   <footer>
     © 2025 - Nhóm Dự án Khoa học Kỹ thuật | Email: duan.canthi@gmail.com
   </footer>
@@ -565,43 +558,8 @@ function checkMyopia() {
       }
       const result = document.getElementById("quizResult");
       result.innerHTML = `✅ Bạn đúng ${score}/15 câu.`;
-      saveResult(score);
-      drawChart();
     }
 
-    // Lưu kết quả
-    function saveResult(score) {
-      let data = JSON.parse(localStorage.getItem("quizData")) || {pass: 0, fail: 0};
-      if (score >= 3) data.pass++;
-      else data.fail++;
-      localStorage.setItem("quizData", JSON.stringify(data));
-    }
-
-    // Vẽ biểu đồ thống kê
-    function drawChart() {
-      const data = JSON.parse(localStorage.getItem("quizData")) || {pass: 0, fail: 0};
-      const ctx = document.getElementById("myChart").getContext("2d");
-      ctx.clearRect(0, 0, 400, 200);
-      const total = data.pass + data.fail;
-      const passH = data.pass * 30;
-      const failH = data.fail * 30;
-
-      ctx.fillStyle = "#28a745";
-      ctx.fillRect(100, 180 - passH, 80, passH);
-      ctx.fillStyle = "#dc3545";
-      ctx.fillRect(250, 180 - failH, 80, failH);
-
-      ctx.fillStyle = "#000";
-      ctx.font = "16px sans-serif";
-      ctx.fillText("Đạt", 130, 195);
-      ctx.fillText("Chưa đạt", 250, 195);
-      ctx.fillText(`Tổng: ${total} học sinh`, 130, 20);
-
-      document.getElementById("statText").innerText =
-        `📈 ${data.pass} học sinh đạt yêu cầu và ${data.fail} học sinh cần ôn thêm.`;
-    }
-
-    window.onload = drawChart;
   </script>
 </body>
 </html>
