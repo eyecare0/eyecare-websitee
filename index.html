@@ -307,6 +307,65 @@
           <li>Ăn uống đầy đủ chất, đặc biệt thực phẩm giàu vitamin A.</li>
           <li>Thường xuyên ra ngoài trời, để mắt tiếp xúc ánh sáng tự nhiên.</li>
         </ul>
+<h3>📏 Phân loại độ cận thị</h3>
+<p>
+  Độ cận thị được tính bằng đơn vị <b>Điốp (D)</b>. 
+  Càng âm nhiều, mắt càng cận nặng hơn. Việc xác định đúng độ cận giúp chọn kính phù hợp và kiểm soát tiến triển của cận thị.
+</p>
+
+<table style="width:100%; border-collapse: collapse; margin-top:10px;">
+  <tr style="background-color:#e0f7fa; text-align:center;">
+    <th style="border:1px solid #ccc; padding:8px;">Mức độ</th>
+    <th style="border:1px solid #ccc; padding:8px;">Khoảng độ (Điốp)</th>
+    <th style="border:1px solid #ccc; padding:8px;">Đặc điểm</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; padding:8px;">Cận nhẹ</td>
+    <td style="border:1px solid #ccc; padding:8px;">-0.25D → -2.75D</td>
+    <td style="border:1px solid #ccc; padding:8px;">Nhìn xa hơi mờ, thường không cần đeo kính liên tục</td>
+  </tr>
+  <tr style="background-color:#f9fdff;">
+    <td style="border:1px solid #ccc; padding:8px;">Cận trung bình</td>
+    <td style="border:1px solid #ccc; padding:8px;">-3.00D → -5.75D</td>
+    <td style="border:1px solid #ccc; padding:8px;">Cần đeo kính khi học, xem bảng hoặc lái xe</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; padding:8px;">Cận nặng</td>
+    <td style="border:1px solid #ccc; padding:8px;">≥ -6.00D</td>
+    <td style="border:1px solid #ccc; padding:8px;">Thị lực giảm nhiều, cần theo dõi thường xuyên và bảo vệ mắt cẩn thận</td>
+  </tr>
+</table>
+
+<div class="quote-box" style="margin-top:15px;">
+  🔍 <i>Hãy kiểm tra mắt định kỳ để phát hiện sớm và điều chỉnh độ kính phù hợp nhé!</i>
+</div>
+<div class="info-text" style="margin-top:20px;">
+  <h3>🧮 Kiểm tra nhanh độ cận của bạn</h3>
+  <p>Nhập độ cận (ví dụ: -2.5):</p>
+  <input type="number" id="myopiaValue" step="0.25" placeholder="-2.5" style="padding:5px; border-radius:5px; border:1px solid #ccc;">
+  <button onclick="checkMyopia()">Xem kết quả</button>
+  <p id="myopiaResult" style="margin-top:10px; font-weight:bold; color:#0077aa;"></p>
+</div>
+
+<script>
+function checkMyopia() {
+  const val = parseFloat(document.getElementById("myopiaValue").value);
+  const result = document.getElementById("myopiaResult");
+  if (isNaN(val)) {
+    result.textContent = "❗ Vui lòng nhập số độ cận hợp lệ.";
+    return;
+  }
+  if (val > 0) {
+    result.textContent = "Đây không phải là độ cận. Bạn có thể bị viễn thị hoặc loạn thị.";
+  } else if (val >= -2.75) {
+    result.textContent = "👁️ Bạn thuộc nhóm CẬN NHẸ – Hãy chú ý tư thế và ánh sáng học tập nhé!";
+  } else if (val >= -5.75) {
+    result.textContent = "👓 Bạn thuộc nhóm CẬN TRUNG BÌNH – Nên đeo kính khi học hoặc xem xa.";
+  } else {
+    result.textContent = "⚠️ Bạn thuộc nhóm CẬN NẶNG – Hãy khám định kỳ và bảo vệ mắt cẩn thận!";
+  }
+}
+</script>
 
         <div class="quote-box">
           💡 <i>“Đôi mắt sáng – Học tập hiệu quả – Tương lai tươi sáng”</i>
