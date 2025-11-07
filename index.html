@@ -239,6 +239,85 @@
   <div class="reminder" id="reminder">
     ⏱️ Đã 20 phút rồi! Hãy nhìn xa 20 giây để cho mắt nghỉ nhé! 👀
   </div>
+<!-- 🔍 Trắc nghiệm nhanh: Bạn có bị cận thị không? -->
+<section id="selfcheck">
+  <h2>🔍 Trắc nghiệm nhanh: Bạn có bị cận thị không?</h2>
+  <div class="quiz" style="max-width:700px;">
+    <p><b>Hãy trả lời 7 câu hỏi sau để biết mình có dấu hiệu bị cận thị không nhé!</b></p>
+
+    <div class="question">
+      <p>1. Bạn có thường phải nheo mắt khi nhìn bảng hoặc vật ở xa không?</p>
+      <input type="radio" name="s1" value="Có"> Có<br>
+      <input type="radio" name="s1" value="Không"> Không
+    </div>
+
+    <div class="question">
+      <p>2. Bạn có thấy chữ hoặc hình ảnh ở xa bị mờ hoặc nhòe không?</p>
+      <input type="radio" name="s2" value="Có"> Có<br>
+      <input type="radio" name="s2" value="Không"> Không
+    </div>
+
+    <div class="question">
+      <p>3. Bạn có hay bị nhức đầu hoặc mỏi mắt sau khi đọc sách hoặc học lâu không?</p>
+      <input type="radio" name="s3" value="Có"> Có<br>
+      <input type="radio" name="s3" value="Không"> Không
+    </div>
+
+    <div class="question">
+      <p>4. Khi nhìn gần (đọc sách, dùng điện thoại), bạn thấy rõ hơn khi nhìn xa chứ?</p>
+      <input type="radio" name="s4" value="Có"> Có<br>
+      <input type="radio" name="s4" value="Không"> Không
+    </div>
+
+    <div class="question">
+      <p>5. Bạn có hay cúi sát mặt vào sách vở hoặc màn hình không?</p>
+      <input type="radio" name="s5" value="Có"> Có<br>
+      <input type="radio" name="s5" value="Không"> Không
+    </div>
+
+    <div class="question">
+      <p>6. Có ai từng nhắc bạn “ngồi xa ra” khi xem tivi hoặc học không?</p>
+      <input type="radio" name="s6" value="Có"> Có<br>
+      <input type="radio" name="s6" value="Không"> Không
+    </div>
+
+    <div class="question">
+      <p>7. Bạn có thấy mắt khô, cay, hoặc mỏi sau khi dùng điện thoại lâu không?</p>
+      <input type="radio" name="s7" value="Có"> Có<br>
+      <input type="radio" name="s7" value="Không"> Không
+    </div>
+
+    <button onclick="checkSelfTest()">Xem kết quả</button>
+    <div class="result" id="selfTestResult"></div>
+  </div>
+</section>
+
+<script>
+function checkSelfTest() {
+  let yesCount = 0;
+  for (let i = 1; i <= 7; i++) {
+    const options = document.getElementsByName("s" + i);
+    options.forEach(o => { if (o.checked && o.value === "Có") yesCount++; });
+  }
+
+  const result = document.getElementById("selfTestResult");
+  let msg = "";
+  if (yesCount === 0) {
+    msg = "🎉 Bạn KHÔNG có dấu hiệu cận thị. Hãy tiếp tục giữ thói quen tốt nhé! 👀";
+    result.style.color = "#28a745"; // xanh lá
+  } else if (yesCount <= 3) {
+    msg = "⚠️ Bạn có một vài dấu hiệu cận nhẹ. Hãy nghỉ mắt thường xuyên và kiểm tra mắt định kỳ.";
+    result.style.color = "#ff9800"; // vàng
+  } else if (yesCount <= 6) {
+    msg = "👓 Bạn có NHIỀU dấu hiệu cận thị. Nên đi khám để đo thị lực chính xác!";
+    result.style.color = "#f44336"; // đỏ
+  } else {
+    msg = "🚨 Hầu hết dấu hiệu cho thấy bạn CÓ THỂ BỊ CẬN. Hãy đi khám sớm để bảo vệ đôi mắt!";
+    result.style.color = "#d32f2f"; // đỏ đậm
+  }
+  result.innerHTML = msg;
+}
+</script>
 
   <!-- 🌿 Giới thiệu -->
   <section id="home" class="intro">
