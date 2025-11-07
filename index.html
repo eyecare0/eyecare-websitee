@@ -320,11 +320,12 @@ function checkSelfTest() {
 }
 </script>
   
-<!-- 👥 Thành viên và lý do chọn đề tài -->
+<!-- 👥 Thành viên & Lý do chọn đề tài -->
 <section id="team">
   <h2>👥 Thành viên & Lý do chọn đề tài</h2>
 
   <div class="team-container">
+    <!-- Lý do chọn đề tài -->
     <div class="team-text">
       <h3>🎯 Lý do chọn đề tài</h3>
       <p>
@@ -341,13 +342,23 @@ function checkSelfTest() {
       </ul>
     </div>
 
+    <!-- Thành viên nhóm -->
     <div class="team-members">
       <h3>👩‍💻 Thành viên nhóm thực hiện</h3>
-      <ul>
-        <li><b>Trần Quốc Toản</b> – Lập trình viên, phát triển tính năng tương tác ⚙️</li>
-        <li><b>Lê Yến Hoa</b> – Nghiên cứu dữ liệu, tổng hợp tài liệu khoa học 📘</li>
-      </ul>
-      <p><i>Giáo viên hướng dẫn: <b>Thầy/Cô [Tên giáo viên]</b></i></p>
+
+      <div class="member-list">
+        <div class="member">
+          <img src="https://i.imgur.com/s8wFpgR.png" alt="Trần Quốc Toản">
+          <p><b>Trần Quốc Toản</b><br><i>Lập trình viên – Phát triển tính năng tương tác</i></p>
+        </div>
+
+        <div class="member">
+          <img src="https://i.imgur.com/Cng7pXf.png" alt="Lê Yến Hoa">
+          <p><b>Lê Yến Hoa</b><br><i>Nghiên cứu dữ liệu & Tổng hợp tài liệu khoa học</i></p>
+        </div>
+      </div>
+
+      <p class="teacher"><i>Giáo viên hướng dẫn: <b>Thầy/Cô [Tên giáo viên]</b></i></p>
     </div>
   </div>
 
@@ -386,21 +397,56 @@ function checkSelfTest() {
 
 .team-text h3, .team-members h3 {
   color: #0077aa;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.team-text ul, .team-members ul {
-  margin-left: 20px;
-  margin-top: 10px;
+/* Danh sách thành viên */
+.member-list {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  text-align: center;
 }
 
-.team-members ul li {
-  margin-bottom: 8px;
+.member {
+  width: 160px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.member img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #0077aa;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.member:hover img {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(0,119,170,0.4);
+}
+
+.member p {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.teacher {
+  margin-top: 20px;
+  text-align: center;
+  font-style: italic;
+  color: #333;
 }
 
 @media (max-width: 700px) {
   .team-container {
     flex-direction: column;
+  }
+  .member-list {
+    justify-content: center;
   }
 }
 </style>
