@@ -863,6 +863,8 @@ button:hover {
 
     // Trắc nghiệm
 function checkQuiz() {
+  const userName = prompt("Nhập tên của bạn để lưu vào bảng xếp hạng:") || "Người chơi";
+  
   const answers = {
     q1:"Đúng",q2:"Đúng",q3:"Đúng",q4:"Đúng",q5:"Đúng",
     q6:"Đúng",q7:"Đúng",q8:"Đúng",q9:"Đúng",q10:"Đúng",
@@ -895,9 +897,7 @@ function checkQuiz() {
     let chosen = "";
     options.forEach(o => { if (o.checked) chosen = o.value; });
     if (chosen === answers[q]) score++;
-    feedback += `<p><b>Câu ${q.replace('q','')}</b>: ${
-      chosen === answers[q] ? "✅ Đúng" : "❌ Sai"
-    } – ${explanations[q]}</p>`;
+    feedback += `<p><b>Câu ${q.replace('q','')}</b>: ${chosen === answers[q] ? "✅ Đúng" : "❌ Sai"} – ${explanations[q]}</p>`;
   }
 
   let level = "";
@@ -907,7 +907,74 @@ function checkQuiz() {
 
   const result = document.getElementById("quizResult");
   result.innerHTML = `🎯 Bạn đúng ${score}/15 câu.<br>${feedback}<br><br><b>Kết quả: ${level}</b>`;
+
+  // Cập nhật bảng xếp hạng
+  updateLeaderboard(userName, score);
 }
+    function updateLeaderboard(name, score) {
+  // Lấy dữ liệu cũ từ localStorage
+  let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+  // Thêm dữ liệu mới
+  leaderboard.push({name, score});
+
+  // Sắp xếp giảm dần theo điểm
+  leaderboard.sort((a,b) => b.score - a.score);
+
+  // Chỉ giữ Top 5
+  leaderboard = leaderboard.slice(0,5);
+
+  // Lưu lại
+  localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+  // Hiển thị bảng
+  const tbody = document.querySelector("#leaderboardTable tbody");
+  tbody.innerHTML = "";
+
+  if (leaderboard.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="3">Chưa có dữ liệu</td></tr>`;
+  } else {
+    leaderboard.forEach((entry, index) => {
+      tbody.innerHTML += `<tr><td>${index+1}</td><td>${entry.name}</td><td>${entry.score}</td></tr>`;
+    });
+  }
+}
+.leaderboard {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 15px;
+  background-color: #e6f0ff;
+  border: 2px solid #0099cc;
+  border-radius: 10px;
+}
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.leaderboard th, .leaderboard td {
+  border: 1px solid #0099cc;
+  padding: 8px;
+  text-align: center;
+}
+.leaderboard th {
+  background-color: #0077aa;
+  color: white;
+}
+<div class="leaderboard">
+  <h2>🏆 Bảng xếp hạng Top 5</h2>
+  <table id="leaderboardTable">
+    <thead>
+      <tr>
+        <th>Thứ hạng</th>
+        <th>Tên</th>
+        <th>Điểm</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="3">Chưa có dữ liệu</td></tr>
+    </tbody>
+  </table>
+</div>
 
   </script>
 </body>
