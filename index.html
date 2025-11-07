@@ -240,85 +240,125 @@
     ⏱️ Đã 20 phút rồi! Hãy nhìn xa 20 giây để cho mắt nghỉ nhé! 👀
   </div>
   
-<!-- 🔍 Trắc nghiệm nhanh: Bạn có bị cận thị không? -->
-<section id="selfcheck">
-  <h2>🔍 Trắc nghiệm nhanh: Bạn có bị cận thị không?</h2>
-  <div class="quiz" style="max-width:700px;">
-    <p><b>Hãy trả lời 7 câu hỏi sau để biết mình có dấu hiệu bị cận thị không nhé!</b></p>
+<!-- 🕹 Quiz tương tác kiểm tra cận thị với âm thanh -->
+<section id="eye-quiz-animated-sound">
+  <h2>🧐 Bạn có nguy cơ cận thị không?</h2>
+  <p>Chọn "Đúng" hoặc "Sai" cho mỗi câu hỏi và xem kết quả ngay!</p>
 
-    <div class="question">
-      <p>1. Bạn có thường phải nheo mắt khi nhìn bảng hoặc vật ở xa không?</p>
-      <input type="radio" name="s1" value="Có"> Có<br>
-      <input type="radio" name="s1" value="Không"> Không
-    </div>
+  <ol id="quiz-list">
+    <li>
+      Khi đọc sách hoặc nhìn điện thoại, bạn thường phải <b>cúi sát sách/máy xuống</b> mới nhìn rõ chữ.<br>
+      <button onclick="answer(this, true)">✅ Đúng</button>
+      <button onclick="answer(this, false)">❌ Sai</button>
+    </li>
+    <li>
+      Bạn thường thấy <b>nhìn bảng, bảng điện tử ở lớp mờ nhòe</b> hoặc phải nheo mắt mới thấy.<br>
+      <button onclick="answer(this, true)">✅ Đúng</button>
+      <button onclick="answer(this, false)">❌ Sai</button>
+    </li>
+    <li>
+      Khi xem tivi hoặc điện thoại lâu, mắt bạn <b>nhức, mỏi hoặc đỏ</b>.<br>
+      <button onclick="answer(this, true)">✅ Đúng</button>
+      <button onclick="answer(this, false)">❌ Sai</button>
+    </li>
+    <li>
+      Bạn thường <b>ngồi quá gần tivi hoặc màn hình máy tính</b> để nhìn rõ.<br>
+      <button onclick="answer(this, true)">✅ Đúng</button>
+      <button onclick="answer(this, false)">❌ Sai</button>
+    </li>
+    <li>
+      Khi đọc sách, bạn cảm thấy <b>chữ nhòe hoặc phải đọc đi đọc lại</b> mới hiểu.<br>
+      <button onclick="answer(this, true)">✅ Đúng</button>
+      <button onclick="answer(this, false)">❌ Sai</button>
+    </li>
+    <li>
+      Bạn thấy mắt thường xuyên <b>khô, chảy nước mắt hoặc chớp không đều</b> sau khi dùng điện thoại/ máy tính.<br>
+      <button onclick="answer(this, true)">✅ Đúng</button>
+      <button onclick="answer(this, false)">❌ Sai</button>
+    </li>
+    <li>
+      Khi tham gia các hoạt động ngoài trời, bạn cảm thấy <b>khó nhìn các vật ở xa</b> (bảng, biển báo… ).<br>
+      <button onclick="answer(this, true)">✅ Đúng</button>
+      <button onclick="answer(this, false)">❌ Sai</button>
+    </li>
+  </ol>
 
-    <div class="question">
-      <p>2. Bạn có thấy chữ hoặc hình ảnh ở xa bị mờ hoặc nhòe không?</p>
-      <input type="radio" name="s2" value="Có"> Có<br>
-      <input type="radio" name="s2" value="Không"> Không
-    </div>
-
-    <div class="question">
-      <p>3. Bạn có hay bị nhức đầu hoặc mỏi mắt sau khi đọc sách hoặc học lâu không?</p>
-      <input type="radio" name="s3" value="Có"> Có<br>
-      <input type="radio" name="s3" value="Không"> Không
-    </div>
-
-    <div class="question">
-      <p>4. Khi nhìn gần (đọc sách, dùng điện thoại), bạn thấy rõ hơn khi nhìn xa chứ?</p>
-      <input type="radio" name="s4" value="Có"> Có<br>
-      <input type="radio" name="s4" value="Không"> Không
-    </div>
-
-    <div class="question">
-      <p>5. Bạn có hay cúi sát mặt vào sách vở hoặc màn hình không?</p>
-      <input type="radio" name="s5" value="Có"> Có<br>
-      <input type="radio" name="s5" value="Không"> Không
-    </div>
-
-    <div class="question">
-      <p>6. Có ai từng nhắc bạn “ngồi xa ra” khi xem tivi hoặc học không?</p>
-      <input type="radio" name="s6" value="Có"> Có<br>
-      <input type="radio" name="s6" value="Không"> Không
-    </div>
-
-    <div class="question">
-      <p>7. Bạn có thấy mắt khô, cay, hoặc mỏi sau khi dùng điện thoại lâu không?</p>
-      <input type="radio" name="s7" value="Có"> Có<br>
-      <input type="radio" name="s7" value="Không"> Không
-    </div>
-
-    <button onclick="checkSelfTest()">Xem kết quả</button>
-    <div class="result" id="selfTestResult"></div>
+  <div id="quiz-result" class="animated-result">
+    <span id="result-text"></span>
   </div>
 </section>
 
-<script>
-function checkSelfTest() {
-  let yesCount = 0;
-  for (let i = 1; i <= 7; i++) {
-    const options = document.getElementsByName("s" + i);
-    options.forEach(o => { if (o.checked && o.value === "Có") yesCount++; });
-  }
+<!-- Thư viện confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
-  const result = document.getElementById("selfTestResult");
-  let msg = "";
-  if (yesCount === 0) {
-    msg = "🎉 Bạn KHÔNG có dấu hiệu cận thị. Hãy tiếp tục giữ thói quen tốt nhé! 👀";
-    result.style.color = "#28a745"; // xanh lá
-  } else if (yesCount <= 3) {
-    msg = "⚠️ Bạn có một vài dấu hiệu cận nhẹ. Hãy nghỉ mắt thường xuyên và kiểm tra mắt định kỳ.";
-    result.style.color = "#ff9800"; // vàng
-  } else if (yesCount <= 6) {
-    msg = "👓 Bạn có NHIỀU dấu hiệu cận thị. Nên đi khám để đo thị lực chính xác!";
-    result.style.color = "#f44336"; // đỏ
-  } else {
-    msg = "🚨 Hầu hết dấu hiệu cho thấy bạn CÓ THỂ BỊ CẬN. Hãy đi khám sớm để bảo vệ đôi mắt!";
-    result.style.color = "#d32f2f"; // đỏ đậm
+<!-- Âm thanh -->
+<audio id="sound-success" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-notification-951.mp3"></audio>
+<audio id="sound-alert" src="https://assets.mixkit.co/sfx/preview/mixkit-alert-quick-chime-766.mp3"></audio>
+
+<script>
+let score = 0;
+let answeredCount = 0;
+
+function answer(btn, isCorrect) {
+  let parent = btn.parentElement;
+  let buttons = parent.querySelectorAll("button");
+  buttons.forEach(b => b.disabled = true);
+
+  if(isCorrect) score++;
+  answeredCount++;
+
+  if(answeredCount === 7) {
+    const resultBox = document.getElementById("quiz-result");
+    const resultText = document.getElementById("result-text");
+    const soundSuccess = document.getElementById("sound-success");
+    const soundAlert = document.getElementById("sound-alert");
+    resultBox.classList.add("show-result");
+
+    if(score >= 3) {
+      resultText.innerHTML = `💡 Bạn trả lời ${score}/7 câu đúng.<br><b>Nguy cơ cận thị cao!</b> Hãy đi kiểm tra mắt và chăm sóc mắt khoa học.`;
+      resultBox.style.background = "#ffe7e7";
+      resultBox.style.borderLeftColor = "#ff5555";
+      resultBox.classList.add("blink-alert");
+      soundAlert.play();
+    } else {
+      resultText.innerHTML = `🎉 Bạn trả lời ${score}/7 câu đúng.<br>Mắt bạn hiện tại <b>tương đối an toàn</b>! Hãy duy trì thói quen tốt.`;
+      resultBox.style.background = "#e7ffe7";
+      resultBox.style.borderLeftColor = "#55aa55";
+      confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+      soundSuccess.play();
+    }
   }
-  result.innerHTML = msg;
 }
 </script>
+
+<style>
+#eye-quiz-animated-sound ol li { margin-bottom: 15px; line-height: 1.6; }
+#eye-quiz-animated-sound button { margin-right: 10px; margin-top: 5px; padding: 5px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+#eye-quiz-animated-sound button:hover { opacity: 0.85; }
+#eye-quiz-animated-sound button:disabled { opacity: 0.5; cursor: not-allowed; }
+#eye-quiz-animated-sound button:nth-child(1) { background:#0077aa; color:white; }
+#eye-quiz-animated-sound button:nth-child(2) { background:#aaa; color:white; }
+
+.animated-result {
+  margin-top: 20px;
+  padding: 15px;
+  border-left: 4px solid #0077aa;
+  border-radius: 6px;
+  display: none;
+  transform: translateY(30px) scale(0.8);
+  opacity: 0;
+  transition: all 0.6s ease-out;
+}
+
+.animated-result.show-result {
+  display: block;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.blink-alert { animation: blink 1s infinite; }
+@keyframes blink { 0%,50%,100%{opacity:1;}25%,75%{opacity:0.3;} }
+</style>
   
 <!-- 👥 Thành viên & Lý do chọn đề tài -->
 <section id="team">
