@@ -1,437 +1,297 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phòng Chống Cận Thị Học Đường</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: linear-gradient(to bottom, #eaf8ff, #ffffff);
-      color: #333;
-    }
-    header {
-      background-color: #0099cc;
-      color: white;
-      text-align: center;
-      padding: 30px 10px;
-    }
-    nav {
-      background-color: #e3f2fd;
-      text-align: center;
-      padding: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    nav a {
-      color: #0077aa;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 0 15px;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #ff6600;
-    }
-    section {
-      padding: 30px;
-      max-width: 900px;
-      margin: auto;
-    }
-    h2 {
-      color: #0077aa;
-      border-bottom: 2px solid #0077aa;
-      display: inline-block;
-      padding-bottom: 5px;
-    }
-    button {
-      background-color: #0077aa;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    button:hover {
-      background-color: #005f80;
-    }
-    footer {
-      text-align: center;
-      background-color: #0099cc;
-      color: white;
-      padding: 15px;
-      margin-top: 40px;
-    }
-    .reminder {
-      background: #fff3cd;
-      color: #856404;
-      border: 1px solid #ffeeba;
-      padding: 10px;
-      text-align: center;
-      margin: 20px auto;
-      width: 80%;
-      border-radius: 5px;
-      display: none; /* Thêm tính năng hẹn giờ để hiển thị */
-    }
-    img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin: 10px 0;
-    }
-    .quiz {
-      background-color: #f8f9fa;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 20px;
-      margin-top: 20px;
-    }
-    .question {
-      margin-bottom: 15px;
-    }
-    .result {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #0077aa;
-    }
-    canvas {
-      display: block;
-      margin: 20px auto;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phòng Chống Cận Thị Học Đường</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom, #eaf8ff, #ffffff);
+      color: #333;
+    }
+    header {
+      background-color: #0099cc;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+    }
+    nav {
+      background-color: #e3f2fd;
+      text-align: center;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav a {
+      color: #0077aa;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 15px;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ff6600;
+    }
+    section {
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      color: #0077aa;
+      border-bottom: 2px solid #0077aa;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    button {
+      background-color: #0077aa;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #005f80;
+    }
+    footer {
+      text-align: center;
+      background-color: #0099cc;
+      color: white;
+      padding: 15px;
+      margin-top: 40px;
+    }
+    .reminder {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+      padding: 10px;
+      text-align: center;
+      margin: 20px auto;
+      width: 80%;
+      border-radius: 5px;
+      display: none;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+    .quiz {
+      background-color: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #0077aa;
+    }
+    canvas {
+      display: block;
+      margin: 20px auto;
+    }
 
-    /* --- Giới thiệu --- */
-    .intro-content {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      animation: fadeIn 1s ease-in-out;
-    }
+    /* --- Giới thiệu --- */
+    .intro-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
 
-    .intro-text {
-      flex: 1 1 450px;
-    }
+    .intro-text {
+      flex: 1 1 450px;
+    }
 
-    .intro-text h3 {
-      color: #005f80;
-      font-weight: 600;
-      margin-top: 5px;
-    }
+    .intro-text h3 {
+      color: #005f80;
+      font-weight: 600;
+      margin-top: 5px;
+    }
 
-    .intro-text p {
-      line-height: 1.6;
-    }
+    .intro-text p {
+      line-height: 1.6;
+    }
 
-    .intro-text ul {
-      margin-top: 10px;
-      padding-left: 20px;
-    }
+    .intro-text ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
 
-    .intro-image {
-      flex: 1 1 350px;
-      text-align: center;
-    }
+    .intro-image {
+      flex: 1 1 350px;
+      text-align: center;
+    }
 
-    .intro-image img {
-      width: 100%;
-      max-width: 400px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.4s ease;
-    }
+    .intro-image img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.4s ease;
+    }
 
-    .intro-image img:hover {
-      transform: scale(1.05);
-    }
+    .intro-image img:hover {
+      transform: scale(1.05);
+    }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    /* --- Kiến thức (1 thể) --- */
-    .info-container {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      gap: 30px;
-      margin-top: 20px;
-    }
+    /* --- Kiến thức (1 thể) --- */
+    .info-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 30px;
+      margin-top: 20px;
+    }
 
-    .info-text {
-      flex: 1 1 500px;
-      background: #f9fdff;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      line-height: 1.7;
-      animation: fadeIn 1s ease-in-out;
-    }
+    .info-text {
+      flex: 1 1 500px;
+      background: #f9fdff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      line-height: 1.7;
+      animation: fadeIn 1s ease-in-out;
+    }
 
-    .info-text h3 {
-      color: #0077aa;
-      margin-top: 20px;
-    }
+    .info-text h3 {
+      color: #0077aa;
+      margin-top: 20px;
+    }
 
-    .info-text ul {
-      padding-left: 25px;
-      margin: 10px 0;
-    }
+    .info-text ul {
+      padding-left: 25px;
+      margin: 10px 0;
+    }
 
-    .quote-box {
-      margin-top: 20px;
-      background: #e0f7fa;
-      border-left: 5px solid #00acc1;
-      padding: 10px 15px;
-      border-radius: 8px;
-      color: #006064;
-      font-weight: 500;
-    }
+    .quote-box {
+      margin-top: 20px;
+      background: #e0f7fa;
+      border-left: 5px solid #00acc1;
+      padding: 10px 15px;
+      border-radius: 8px;
+      color: #006064;
+      font-weight: 500;
+    }
 
-    .info-image {
-      flex: 1 1 350px;
-      text-align: center;
-    }
+    .info-image {
+      flex: 1 1 350px;
+      text-align: center;
+    }
 
-    .info-image img {
-      width: 100%;
-      max-width: 380px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      transition: transform 0.4s ease;
-    }
+    .info-image img {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.4s ease;
+    }
 
-    .info-image img:hover {
-      transform: scale(1.05);
-    }
+    .info-image img:hover {
+      transform: scale(1.05);
+    }
 
-    /* --- Bài tập thư giãn --- */
-    ol li {
-      margin-bottom: 10px;
-    }
+    /* --- Bài tập thư giãn --- */
+    ol li {
+      margin-bottom: 10px;
+    }
 
-    @media (max-width: 700px) {
-      .intro-content, .info-container {
-        flex-direction: column-reverse;
-        text-align: center;
-      }
-      .intro-text, .info-text {
-        text-align: left;
-      }
-    }
-    /* Style cho Quiz nguy cơ cận thị (Đầu trang) */
-    #eye-quiz-animated-sound ol li { margin-bottom: 15px; line-height: 1.6; }
-    #eye-quiz-animated-sound button { margin-right: 10px; margin-top: 5px; padding: 5px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    #eye-quiz-animated-sound button:hover { opacity: 0.85; }
-    #eye-quiz-animated-sound button:disabled { opacity: 0.5; cursor: not-allowed; }
-    #eye-quiz-animated-sound button:nth-child(1) { background:#0077aa; color:white; }
-    #eye-quiz-animated-sound button:nth-child(2) { background:#aaa; color:white; }
-
-    .animated-result {
-      margin-top: 20px;
-      padding: 15px;
-      border-left: 4px solid #0077aa;
-      border-radius: 6px;
-      display: none;
-      transform: translateY(30px) scale(0.8);
-      opacity: 0;
-      transition: all 0.6s ease-out;
-    }
-
-    .animated-result.show-result {
-      display: block;
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
-
-    .blink-alert { animation: blink 1s infinite; }
-    @keyframes blink { 0%,50%,100%{opacity:1;}25%,75%{opacity:0.3;} }
-
-    /* Style cho phần nhóm/team */
-    #team {
-      background: #f8fcff;
-      padding: 40px 25px;
-      max-width: 1000px;
-      margin: 30px auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    .team-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      align-items: flex-start;
-    }
-
-    .team-text, .team-members {
-      flex: 1 1 450px;
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      line-height: 1.7;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    .team-text h3, .team-members h3 {
-      color: #0077aa;
-      margin-bottom: 12px;
-    }
-
-    .member-list {
-      display: flex;
-      justify-content: space-evenly;
-      gap: 25px;
-      flex-wrap: wrap;
-      margin-top: 15px;
-      text-align: center;
-    }
-
-    .member {
-      width: 160px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .member img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid #0077aa;
-      object-fit: cover;
-      transition: all 0.3s ease;
-    }
-
-    .member:hover img {
-      transform: scale(1.08);
-      box-shadow: 0 0 15px rgba(0,119,170,0.4);
-    }
-
-    .member p {
-      font-size: 14px;
-      margin-top: 8px;
-    }
-
-    .teacher {
-      margin-top: 20px;
-      text-align: center;
-      font-style: italic;
-      color: #333;
-    }
-
-    @media (max-width: 700px) {
-      .team-container {
-        flex-direction: column;
-      }
-      .member-list {
-        justify-content: center;
-      }
-    }
-    /* Style cho Quiz kiến thức (Cuối trang) */
-    .quiz-knowledge {
-      background: #f9fdff;
-      border: 2px solid #cce7f3;
-      border-radius: 10px;
-      padding: 25px;
-      max-width: 850px;
-      margin: 20px auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    .question-knowledge {
-      background: #ffffff;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      border-left: 5px solid #0099cc;
-      transition: background 0.3s;
-    }
-    .question-knowledge:hover { background: #f0faff; }
-    .question-knowledge p { font-weight: 600; margin-bottom: 5px; }
-    .leaderboard {
-      max-width: 500px;
-      margin: 30px auto;
-      padding: 15px;
-      background-color: #e6f0ff;
-      border: 2px solid #0099cc;
-      border-radius: 10px;
-    }
-    .leaderboard table { width: 100%; border-collapse: collapse; }
-    .leaderboard th, .leaderboard td { border: 1px solid #0099cc; padding: 8px; text-align: center; }
-    .leaderboard th { background-color: #0077aa; color: white; }
-  </style>
+    @media (max-width: 700px) {
+      .intro-content, .info-container {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .intro-text, .info-text {
+        text-align: left;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <h1>PHÒNG CHỐNG CẬN THỊ HỌC ĐƯỜNG</h1>
-    <p>Website tuyên truyền, hướng dẫn và hỗ trợ chăm sóc mắt cho học sinh</p>
-  </header>
+  <header>
+    <h1>PHÒNG CHỐNG CẬN THỊ HỌC ĐƯỜNG</h1>
+    <p>Website tuyên truyền, hướng dẫn và hỗ trợ chăm sóc mắt cho học sinh</p>
+  </header>
 
-  <nav>
-    <a href="#home">Trang chủ</a>
-    <a href="#info">Kiến thức</a>
-    <a href="#exercise">Bài tập mắt</a>
-    <a href="#quiz">Câu hỏi</a>
-  </nav>
+  <nav>
+    <a href="#home">Trang chủ</a>
+    <a href="#info">Kiến thức</a>
+    <a href="#exercise">Bài tập mắt</a>
+    <a href="#quiz">Câu hỏi</a>
+  </nav>
 
-  <div class="reminder" id="reminder">
-    ⏱️ Đã 20 phút rồi! Hãy nhìn xa 20 giây để cho mắt nghỉ nhé! 👀
-  </div>
-  
+  <div class="reminder" id="reminder">
+    ⏱️ Đã 20 phút rồi! Hãy nhìn xa 20 giây để cho mắt nghỉ nhé! 👀
+  </div>
+  
+<!-- 🕹 Quiz tương tác kiểm tra cận thị với âm thanh -->
 <section id="eye-quiz-animated-sound">
-  <h2>🧐 Bạn có nguy cơ cận thị không?</h2>
-  <p>Chọn "Có" hoặc "Không" cho mỗi câu hỏi và xem kết quả ngay!</p>
+  <h2>🧐 Bạn có nguy cơ cận thị không?</h2>
+  <p>Chọn "Đúng" hoặc "Sai" cho mỗi câu hỏi và xem kết quả ngay!</p>
 
-  <ol id="quiz-list">
-    <li>
-      Khi đọc sách hoặc nhìn điện thoại, bạn thường phải <b>cúi sát sách/máy xuống</b> mới nhìn rõ chữ.<br>
-      <button onclick="answer(this, true)">✅ Có</button>
-      <button onclick="answer(this, false)">❌ Không</button>
-    </li>
-    <li>
-      Bạn thường thấy <b>nhìn bảng, bảng điện tử ở lớp mờ nhòe</b> hoặc phải nheo mắt mới thấy.<br>
-      <button onclick="answer(this, true)">✅ Có</button>
-      <button onclick="answer(this, false)">❌ Không</button>
-    </li>
-    <li>
-      Khi xem tivi hoặc điện thoại lâu, mắt bạn <b>nhức, mỏi hoặc đỏ</b>.<br>
-      <button onclick="answer(this, true)">✅ Có</button>
-      <button onclick="answer(this, false)">❌ Không</button>
-    </li>
-    <li>
-      Bạn thường <b>ngồi quá gần tivi hoặc màn hình máy tính</b> để nhìn rõ.<br>
-      <button onclick="answer(this, true)">✅ Có</button>
-      <button onclick="answer(this, false)">❌ Không</button>
-    </li>
-    <li>
-      Khi đọc sách, bạn cảm thấy <b>chữ nhòe hoặc phải đọc đi đọc lại</b> mới hiểu. 
-      <br> **(Đã sửa logic: Đây là dấu hiệu nguy cơ)**
-      <button onclick="answer(this, true)">✅ Có</button>
-      <button onclick="answer(this, false)">❌ Không</button>
-    </li>
-    <li>
-      Bạn thấy mắt thường xuyên <b>khô, chảy nước mắt hoặc chớp không đều</b> sau khi dùng điện thoại/ máy tính.
-      <br> **(Đã sửa logic: Đây là dấu hiệu nguy cơ)**
-      <button onclick="answer(this, true)">✅ Có</button>
-      <button onclick="answer(this, false)">❌ Không</button>
-    </li>
-    <li>
-      Khi tham gia các hoạt động ngoài trời, bạn cảm thấy <b>khó nhìn các vật ở xa</b> (bảng, biển báo… ).
-      <br> **(Đã sửa logic: Đây là dấu hiệu nguy cơ)**
-      <button onclick="answer(this, true)">✅ Có</button>
-      <button onclick="answer(this, false)">❌ Không</button>
-    </li>
-  </ol>
+  <ol id="quiz-list">
+    <li>
+      Khi đọc sách hoặc nhìn điện thoại, bạn thường phải <b>cúi sát sách/máy xuống</b> mới nhìn rõ chữ.<br>
+      <button onclick="answer(this, true)">✅ Có</button>
+      <button onclick="answer(this, false)">❌ Không</button>
+    </li>
+    <li>
+      Bạn thường thấy <b>nhìn bảng, bảng điện tử ở lớp mờ nhòe</b> hoặc phải nheo mắt mới thấy.<br>
+      <button onclick="answer(this, true)">✅ Có</button>
+      <button onclick="answer(this, false)">❌ Không</button>
+    </li>
+    <li>
+      Khi xem tivi hoặc điện thoại lâu, mắt bạn <b>nhức, mỏi hoặc đỏ</b>.<br>
+      <button onclick="answer(this, true)">✅ Có</button>
+      <button onclick="answer(this, false)">❌ Không</button>
+    </li>
+    <li>
+      Bạn thường <b>ngồi quá gần tivi hoặc màn hình máy tính</b> để nhìn rõ.<br>
+      <button onclick="answer(this, true)">✅ Có</button>
+      <button onclick="answer(this, false)">❌ Không</button>
+    </li>
+    <li>
+      Khi đọc sách, bạn cảm thấy <b>chữ nhòe hoặc phải đọc đi đọc lại</b> mới hiểu.<br>
+      <button onclick="answer(this, true)">✅ Không</button>
+      <button onclick="answer(this, false)">❌ Có</button>
+    </li>
+    <li>
+      Bạn thấy mắt thường xuyên <b>khô, chảy nước mắt hoặc chớp không đều</b> sau khi dùng điện thoại/ máy tính.<br>
+      <button onclick="answer(this, true)">✅ Không</button>
+      <button onclick="answer(this, false)">❌ Có</button>
+    </li>
+    <li>
+      Khi tham gia các hoạt động ngoài trời, bạn cảm thấy <b>khó nhìn các vật ở xa</b> (bảng, biển báo… ).<br>
+      <button onclick="answer(this, true)">✅ Không</button>
+      <button onclick="answer(this, false)">❌ Có</button>
+    </li>
+  </ol>
 
-  <div id="quiz-result" class="animated-result">
-    <span id="result-text"></span>
-  </div>
+  <div id="quiz-result" class="animated-result">
+    <span id="result-text"></span>
+  </div>
 </section>
 
+<!-- Thư viện confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
+<!-- Âm thanh -->
 <audio id="sound-success" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-notification-951.mp3"></audio>
 <audio id="sound-alert" src="https://assets.mixkit.co/sfx/preview/mixkit-alert-quick-chime-766.mp3"></audio>
 
@@ -440,495 +300,640 @@ let score = 0;
 let answeredCount = 0;
 
 function answer(btn, isCorrect) {
-  let parent = btn.parentElement;
-  let buttons = parent.querySelectorAll("button");
-  buttons.forEach(b => b.disabled = true);
+  let parent = btn.parentElement;
+  let buttons = parent.querySelectorAll("button");
+  buttons.forEach(b => b.disabled = true);
 
-  if(isCorrect) score++;
-  answeredCount++;
+  if(isCorrect) score++;
+  answeredCount++;
 
-  if(answeredCount === 7) {
-    const resultBox = document.getElementById("quiz-result");
-    const resultText = document.getElementById("result-text");
-    const soundSuccess = document.getElementById("sound-success");
-    const soundAlert = document.getElementById("sound-alert");
-    resultBox.classList.add("show-result");
+  if(answeredCount === 7) {
+    const resultBox = document.getElementById("quiz-result");
+    const resultText = document.getElementById("result-text");
+    const soundSuccess = document.getElementById("sound-success");
+    const soundAlert = document.getElementById("sound-alert");
+    resultBox.classList.add("show-result");
 
-    if(score >= 3) {
-      resultText.innerHTML = `💡 Bạn trả lời ${score}/7 câu đúng.<br><b>Nguy cơ cận thị cao!</b> Hãy đi kiểm tra mắt và chăm sóc mắt khoa học.`;
-      resultBox.style.background = "#ffe7e7";
-      resultBox.style.borderLeftColor = "#ff5555";
-      resultBox.classList.add("blink-alert");
-      soundAlert.play();
-    } else {
-      resultText.innerHTML = `🎉 Bạn trả lời ${score}/7 câu đúng.<br>Mắt bạn hiện tại <b>tương đối an toàn</b>! Hãy duy trì thói quen tốt.`;
-      resultBox.style.background = "#e7ffe7";
-      resultBox.style.borderLeftColor = "#55aa55";
-      confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
-      soundSuccess.play();
-    }
-  }
+    if(score >= 3) {
+      resultText.innerHTML = 💡 Bạn trả lời ${score}/7 câu đúng.<br><b>Nguy cơ cận thị cao!</b> Hãy đi kiểm tra mắt và chăm sóc mắt khoa học.;
+      resultBox.style.background = "#ffe7e7";
+      resultBox.style.borderLeftColor = "#ff5555";
+      resultBox.classList.add("blink-alert");
+      soundAlert.play();
+    } else {
+      resultText.innerHTML = 🎉 Bạn trả lời ${score}/7 câu đúng.<br>Mắt bạn hiện tại <b>tương đối an toàn</b>! Hãy duy trì thói quen tốt.;
+      resultBox.style.background = "#e7ffe7";
+      resultBox.style.borderLeftColor = "#55aa55";
+      confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+      soundSuccess.play();
+    }
+  }
 }
-// ------------------------------------------------------------------
-// Bổ sung: Chức năng hẹn giờ cho quy tắc 20-20-20 (Mỗi 20 phút)
-function startReminder() {
-  const reminder = document.getElementById('reminder');
-  // Thiết lập nhắc nhở lặp lại mỗi 20 phút (1200000ms)
-  setInterval(() => {
-    reminder.style.display = 'block'; // Hiện thông báo
-    setTimeout(() => {
-      reminder.style.display = 'none'; // Ẩn thông báo sau 5 giây
-    }, 5000);
-  }, 1200000); // 20 phút
-}
-window.onload = startReminder;
-// ------------------------------------------------------------------
 </script>
-  
+
+<style>
+#eye-quiz-animated-sound ol li { margin-bottom: 15px; line-height: 1.6; }
+#eye-quiz-animated-sound button { margin-right: 10px; margin-top: 5px; padding: 5px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+#eye-quiz-animated-sound button:hover { opacity: 0.85; }
+#eye-quiz-animated-sound button:disabled { opacity: 0.5; cursor: not-allowed; }
+#eye-quiz-animated-sound button:nth-child(1) { background:#0077aa; color:white; }
+#eye-quiz-animated-sound button:nth-child(2) { background:#aaa; color:white; }
+
+.animated-result {
+  margin-top: 20px;
+  padding: 15px;
+  border-left: 4px solid #0077aa;
+  border-radius: 6px;
+  display: none;
+  transform: translateY(30px) scale(0.8);
+  opacity: 0;
+  transition: all 0.6s ease-out;
+}
+
+.animated-result.show-result {
+  display: block;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.blink-alert { animation: blink 1s infinite; }
+@keyframes blink { 0%,50%,100%{opacity:1;}25%,75%{opacity:0.3;} }
+</style>
+  
+<!-- 👥 Thành viên & Lý do chọn đề tài -->
 <section id="team">
-  <h2>👥 Thành viên & Lý do chọn đề tài</h2>
+  <h2>👥 Thành viên & Lý do chọn đề tài</h2>
 
-  <div class="team-container">
-        <div class="team-text">
-      <h3>🎯 Lý do chọn đề tài</h3>
-      <p>
-        Trong thời đại công nghệ phát triển, học sinh ngày càng tiếp xúc nhiều với màn hình điện thoại, máy tính và thiết bị điện tử.
-        Tỷ lệ cận thị học đường tăng cao khiến chất lượng học tập và sinh hoạt của các em bị ảnh hưởng đáng kể.
-      </p>
-      <p>
-        Chính vì vậy, nhóm chúng em chọn đề tài <b>“Phòng chống cận thị học đường”</b> với mong muốn:
-      </p>
-      <ul>
-        <li>🧠 Nâng cao nhận thức cho học sinh về tầm quan trọng của việc bảo vệ thị lực.</li>
-        <li>👁️ Hướng dẫn cách chăm sóc mắt đúng khoa học, dễ áp dụng hàng ngày.</li>
-        <li>🌱 Góp phần giảm tỷ lệ cận thị trong học đường và lan tỏa thông điệp “Mắt sáng – Tương lai sáng”.</li>
-      </ul>
-    </div>
+  <div class="team-container">
+    <!-- Lý do chọn đề tài -->
+    <div class="team-text">
+      <h3>🎯 Lý do chọn đề tài</h3>
+      <p>
+        Trong thời đại công nghệ phát triển, học sinh ngày càng tiếp xúc nhiều với màn hình điện thoại, máy tính và thiết bị điện tử.
+        Tỷ lệ cận thị học đường tăng cao khiến chất lượng học tập và sinh hoạt của các em bị ảnh hưởng đáng kể.
+      </p>
+      <p>
+        Chính vì vậy, nhóm chúng em chọn đề tài <b>“Phòng chống cận thị học đường”</b> với mong muốn:
+      </p>
+      <ul>
+        <li>🧠 Nâng cao nhận thức cho học sinh về tầm quan trọng của việc bảo vệ thị lực.</li>
+        <li>👁️ Hướng dẫn cách chăm sóc mắt đúng khoa học, dễ áp dụng hàng ngày.</li>
+        <li>🌱 Góp phần giảm tỷ lệ cận thị trong học đường và lan tỏa thông điệp “Mắt sáng – Tương lai sáng”.</li>
+      </ul>
+    </div>
 
-        <div class="team-members">
-      <h3>👩‍💻 Thành viên nhóm thực hiện</h3>
+    <!-- Thành viên nhóm -->
+    <div class="team-members">
+      <h3>👩‍💻 Thành viên nhóm thực hiện</h3>
 
-      <div class="member-list">
-        <div class="member">
-          <img src="https://placehold.co/120x120/0077aa/white?text=TQN" alt="Trần Quốc Toản">
-          <p><b>Trần Quốc Toản</b><br><i>Lập trình viên – Phát triển tính năng tương tác</i></p>
-        </div>
+      <div class="member-list">
+        <div class="member">
+          <img src="Gemini_Generated_Image_nsx4odnsx4odnsx4.png" alt="Trần Quốc Toản">
+          <p><b>Trần Quốc Toản</b><br><i>Lập trình viên – Phát triển tính năng tương tác</i></p>
+        </div>
 
-        <div class="member">
-          <img src="https://placehold.co/120x120/0077aa/white?text=LYH" alt="Lê Yến Hoa">
-          <p><b>Lê Yến Hoa</b><br><i>Nghiên cứu dữ liệu & Tổng hợp tài liệu khoa học</i></p>
-        </div>
-      </div>
+        <div class="member">
+          <img src="https://i.imgur.com/Cng7pXf.png" alt="Lê Yến Hoa">
+          <p><b>Lê Yến Hoa</b><br><i>Nghiên cứu dữ liệu & Tổng hợp tài liệu khoa học</i></p>
+        </div>
+      </div>
 
-      <p class="teacher"><i>Giáo viên hướng dẫn: <b>Thầy/Cô [Tên giáo viên]</b></i></p>
-    </div>
-  </div>
+      <p class="teacher"><i>Giáo viên hướng dẫn: <b>Thầy/Cô [Tên giáo viên]</b></i></p>
+    </div>
+  </div>
 
-  <div class="quote-box" style="margin-top:15px;">
-    💬 <i>“Chúng em tin rằng việc chăm sóc đôi mắt từ sớm chính là chăm sóc tương lai của mỗi học sinh.”</i>
-  </div>
+  <div class="quote-box" style="margin-top:15px;">
+    💬 <i>“Chúng em tin rằng việc chăm sóc đôi mắt từ sớm chính là chăm sóc tương lai của mỗi học sinh.”</i>
+  </div>
 </section>
 
-   <section id="home" class="intro">
-  <div class="intro-content">
-    <div class="intro-text">
-      <h2>🌿 Giới thiệu</h2>
-      <h3>Chăm sóc đôi mắt – Bảo vệ tương lai học đường 👓</h3>
-      <p>
-        Cận thị học đường đang ngày càng phổ biến ở học sinh Việt Nam. 
-        Theo thống kê, có đến <b>40–60% học sinh ở các thành phố lớn</b> bị cận thị, 
-        và con số này vẫn tăng nhanh do việc sử dụng thiết bị điện tử quá nhiều, 
-        tư thế học sai hoặc thiếu ánh sáng học tập.
-      </p>
-      <p>
-        Nếu không được chăm sóc đúng cách, mắt có thể mệt mỏi, suy giảm thị lực, 
-        ảnh hưởng đến việc học, giải trí và sinh hoạt hàng ngày. Trẻ cận thị sớm 
-        có nguy cơ gặp khó khăn về thị lực khi trưởng thành, thậm chí ảnh hưởng đến sức khỏe tổng thể.
-      </p>
-      <p>
-        Ngược lại, việc chăm sóc mắt đúng cách từ nhỏ mang lại nhiều lợi ích:
-      </p>
-      <ul>
-        <li>👀 Giảm nguy cơ tăng độ cận thị và các bệnh về mắt.</li>
-        <li>📚 Tăng khả năng tập trung học tập và đọc sách.</li>
-        <li>🌟 Tạo thói quen sinh hoạt lành mạnh, cân bằng thời gian nhìn gần và nhìn xa.</li>
-        <li>💖 Bảo vệ sức khỏe tổng thể, đặc biệt là trí não và tinh thần.</li>
-      </ul>
-      <p>
-        Bằng việc áp dụng các mẹo nhỏ hàng ngày như <b>nghỉ giải lao, bài tập mắt, tư thế học đúng, ánh sáng hợp lý</b>, 
-        chúng ta không chỉ bảo vệ mắt mà còn đầu tư cho một tương lai học đường tươi sáng.
-      </p>
-      <p><b>“Mắt sáng – Học tốt – Tương lai rộng mở” 🌈</b></p>
-    </div>
-    <div class="intro-image">
-      <img src="https://placehold.co/400x300/eaf8ff/0077aa?text=Đôi+mắt+sáng+khỏe" alt="Đôi mắt sáng khỏe mạnh">
-      <p style="font-style: italic; color:#555; margin-top:10px;">
-        "Mỗi ngày dành 20 phút cho đôi mắt – bạn đang đầu tư cho tương lai của mình." 💖
-      </p>
-    </div>
-  </div>
+<style>
+#team {
+  background: #f8fcff;
+  padding: 40px 25px;
+  max-width: 1000px;
+  margin: 30px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.team-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.team-text, .team-members {
+  flex: 1 1 450px;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  line-height: 1.7;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.team-text h3, .team-members h3 {
+  color: #0077aa;
+  margin-bottom: 12px;
+}
+
+/* Danh sách thành viên */
+.member-list {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.member {
+  width: 160px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.member img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #0077aa;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.member:hover img {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(0,119,170,0.4);
+}
+
+.member p {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.teacher {
+  margin-top: 20px;
+  text-align: center;
+  font-style: italic;
+  color: #333;
+}
+
+@media (max-width: 700px) {
+  .team-container {
+    flex-direction: column;
+  }
+  .member-list {
+    justify-content: center;
+  }
+}
+</style>
+
+   <section id="home" class="intro">
+  <div class="intro-content">
+    <div class="intro-text">
+      <h2>🌿 Giới thiệu</h2>
+      <h3>Chăm sóc đôi mắt – Bảo vệ tương lai học đường 👓</h3>
+Cận thị học đường đang ngày càng phổ biến ở học sinh Việt Nam. 
+        Theo thống kê, có đến <b>40–60% học sinh ở các thành phố lớn</b> bị cận thị, 
+        và con số này vẫn tăng nhanh do việc sử dụng thiết bị điện tử quá nhiều, 
+        tư thế học sai hoặc thiếu ánh sáng học tập.
+      </p>
+      <p>
+        Nếu không được chăm sóc đúng cách, mắt có thể mệt mỏi, suy giảm thị lực, 
+        ảnh hưởng đến việc học, giải trí và sinh hoạt hàng ngày. Trẻ cận thị sớm 
+        có nguy cơ gặp khó khăn về thị lực khi trưởng thành, thậm chí ảnh hưởng đến sức khỏe tổng thể.
+      </p>
+      <p>
+        Ngược lại, việc chăm sóc mắt đúng cách từ nhỏ mang lại nhiều lợi ích:
+      </p>
+      <ul>
+        <li>👀 Giảm nguy cơ tăng độ cận thị và các bệnh về mắt.</li>
+        <li>📚 Tăng khả năng tập trung học tập và đọc sách.</li>
+        <li>🌟 Tạo thói quen sinh hoạt lành mạnh, cân bằng thời gian nhìn gần và nhìn xa.</li>
+        <li>💖 Bảo vệ sức khỏe tổng thể, đặc biệt là trí não và tinh thần.</li>
+      </ul>
+      <p>
+        Bằng việc áp dụng các mẹo nhỏ hàng ngày như <b>nghỉ giải lao, bài tập mắt, tư thế học đúng, ánh sáng hợp lý</b>, 
+        chúng ta không chỉ bảo vệ mắt mà còn đầu tư cho một tương lai học đường tươi sáng.
+      </p>
+      <p><b>“Mắt sáng – Học tốt – Tương lai rộng mở” 🌈</b></p>
+    </div>
+    <div class="intro-image">
+      <img src="cham-soc-mat.jpg" alt="Đôi mắt sáng khỏe mạnh">
+      <p style="font-style: italic; color:#555; margin-top:10px;">
+        "Mỗi ngày dành 20 phút cho đôi mắt – bạn đang đầu tư cho tương lai của mình." 💖
+      </p>
+    </div>
+  </div>
 </section>
-  
-    <section id="info">
-    <h2>📘 Kiến thức về cận thị học đường</h2>
-    <div class="info-container">
-      <div class="info-text">
-        <p>
-          Cận thị học đường là tình trạng <b>mắt không nhìn rõ các vật ở xa</b>, 
-          thường gặp ở học sinh do thói quen học tập và sinh hoạt chưa đúng. 
-          Tỉ lệ học sinh bị cận thị đang tăng nhanh tại Việt Nam, đặc biệt ở khu vực thành thị.
-        </p>
+  
+  <!-- 📘 Kiến thức -->
+  <section id="info">
+    <h2>📘 Kiến thức về cận thị học đường</h2>
+    <div class="info-container">
+      <div class="info-text">
+        <p>
+          Cận thị học đường là tình trạng <b>mắt không nhìn rõ các vật ở xa</b>, 
+          thường gặp ở học sinh do thói quen học tập và sinh hoạt chưa đúng. 
+          Tỉ lệ học sinh bị cận thị đang tăng nhanh tại Việt Nam, đặc biệt ở khu vực thành thị.
+        </p>
 
-        <h3>😵 Nguyên nhân</h3>
-        <ul>
-          <li>Ngồi học quá gần sách vở hoặc màn hình.</li>
-          <li>Dùng thiết bị điện tử lâu mà không nghỉ cho mắt.</li>
-          <li>Học trong phòng thiếu ánh sáng, tư thế sai.</li>
-          <li>Ít vận động ngoài trời.</li>
-        </ul>
+        <h3>😵 Nguyên nhân</h3>
+        <ul>
+          <li>Ngồi học quá gần sách vở hoặc màn hình.</li>
+          <li>Dùng thiết bị điện tử lâu mà không nghỉ cho mắt.</li>
+          <li>Học trong phòng thiếu ánh sáng, tư thế sai.</li>
+          <li>Ít vận động ngoài trời.</li>
+        </ul>
 
-        <h3>👁️ Dấu hiệu nhận biết</h3>
-        <ul>
-          <li>Nhìn xa bị mờ, phải nheo mắt mới thấy rõ.</li>
-          <li>Hay nhức đầu, mỏi mắt khi đọc sách hoặc xem tivi.</li>
-          <li>Khó tập trung học tập do thị lực giảm.</li>
-        </ul>
+        <h3>👁️ Dấu hiệu nhận biết</h3>
+        <ul>
+          <li>Nhìn xa bị mờ, phải nheo mắt mới thấy rõ.</li>
+          <li>Hay nhức đầu, mỏi mắt khi đọc sách hoặc xem tivi.</li>
+          <li>Khó tập trung học tập do thị lực giảm.</li>
+        </ul>
 
-        <h3>🛡️ Cách phòng tránh</h3>
-        <ul>
-          <li>Giữ khoảng cách 30–40cm khi học hoặc sử dụng thiết bị.</li>
-          <li>Áp dụng quy tắc <b>20–20–20</b>: mỗi 20 phút, nhìn xa 20 giây.</li>
-          <li>Ăn uống đầy đủ chất, đặc biệt thực phẩm giàu vitamin A.</li>
-          <li>Thường xuyên ra ngoài trời, để mắt tiếp xúc ánh sáng tự nhiên.</li>
-        </ul>
+        <h3>🛡️ Cách phòng tránh</h3>
+        <ul>
+          <li>Giữ khoảng cách 30–40cm khi học hoặc sử dụng thiết bị.</li>
+          <li>Áp dụng quy tắc <b>20–20–20</b>: mỗi 20 phút, nhìn xa 20 giây.</li>
+          <li>Ăn uống đầy đủ chất, đặc biệt thực phẩm giàu vitamin A.</li>
+          <li>Thường xuyên ra ngoài trời, để mắt tiếp xúc ánh sáng tự nhiên.</li>
+        </ul>
 <h3>📏 Phân loại độ cận thị</h3>
 <p>
-  Độ cận thị được tính bằng đơn vị <b>Điốp (D)</b>. 
-  Càng âm nhiều, mắt càng cận nặng hơn. Việc xác định đúng độ cận giúp chọn kính phù hợp và kiểm soát tiến triển của cận thị.
+  Độ cận thị được tính bằng đơn vị <b>Điốp (D)</b>. 
+  Càng âm nhiều, mắt càng cận nặng hơn. Việc xác định đúng độ cận giúp chọn kính phù hợp và kiểm soát tiến triển của cận thị.
 </p>
 
 <table style="width:100%; border-collapse: collapse; margin-top:10px;">
-  <tr style="background-color:#e0f7fa; text-align:center;">
-    <th style="border:1px solid #ccc; padding:8px;">Mức độ</th>
-    <th style="border:1px solid #ccc; padding:8px;">Khoảng độ (Điốp)</th>
-    <th style="border:1px solid #ccc; padding:8px;">Đặc điểm</th>
-  </tr>
-  <tr>
-    <td style="border:1px solid #ccc; padding:8px;">Cận nhẹ</td>
-    <td style="border:1px solid #ccc; padding:8px;">-0.25D → -2.75D</td>
-    <td style="border:1px solid #ccc; padding:8px;">Nhìn xa hơi mờ, thường không cần đeo kính liên tục</td>
-  </tr>
-  <tr style="background-color:#f9fdff;">
-    <td style="border:1px solid #ccc; padding:8px;">Cận trung bình</td>
-    <td style="border:1px solid #ccc; padding:8px;">-3.00D → -5.75D</td>
-    <td style="border:1px solid #ccc; padding:8px;">Cần đeo kính khi học, xem bảng hoặc lái xe</td>
-  </tr>
-  <tr>
-    <td style="border:1px solid #ccc; padding:8px;">Cận nặng</td>
-    <td style="border:1px solid #ccc; padding:8px;">≥ -6.00D</td>
-    <td style="border:1px solid #ccc; padding:8px;">Thị lực giảm nhiều, cần theo dõi thường xuyên và bảo vệ mắt cẩn thận</td>
-  </tr>
+  <tr style="background-color:#e0f7fa; text-align:center;">
+    <th style="border:1px solid #ccc; padding:8px;">Mức độ</th>
+    <th style="border:1px solid #ccc; padding:8px;">Khoảng độ (Điốp)</th>
+    <th style="border:1px solid #ccc; padding:8px;">Đặc điểm</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; padding:8px;">Cận nhẹ</td>
+    <td style="border:1px solid #ccc; padding:8px;">-0.25D → -2.75D</td>
+    <td style="border:1px solid #ccc; padding:8px;">Nhìn xa hơi mờ, thường không cần đeo kính liên tục</td>
+  </tr>
+  <tr style="background-color:#f9fdff;">
+    <td style="border:1px solid #ccc; padding:8px;">Cận trung bình</td>
+    <td style="border:1px solid #ccc; padding:8px;">-3.00D → -5.75D</td>
+    <td style="border:1px solid #ccc; padding:8px;">Cần đeo kính khi học, xem bảng hoặc lái xe</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; padding:8px;">Cận nặng</td>
+    <td style="border:1px solid #ccc; padding:8px;">≥ -6.00D</td>
+    <td style="border:1px solid #ccc; padding:8px;">Thị lực giảm nhiều, cần theo dõi thường xuyên và bảo vệ mắt cẩn thận</td>
+  </tr>
 </table>
 
 <div class="quote-box" style="margin-top:15px;">
-  🔍 <i>Hãy kiểm tra mắt định kỳ để phát hiện sớm và điều chỉnh độ kính phù hợp nhé!</i>
+  🔍 <i>Hãy kiểm tra mắt định kỳ để phát hiện sớm và điều chỉnh độ kính phù hợp nhé!</i>
 </div>
 <div class="info-text" style="margin-top:20px;">
-  <h3>🧮 Kiểm tra nhanh độ cận của bạn</h3>
-  <p>Nhập độ cận (ví dụ: -2.5):</p>
-  <input type="number" id="myopiaValue" step="0.25" placeholder="-2.5" style="padding:5px; border-radius:5px; border:1px solid #ccc;">
-  <button onclick="checkMyopia()">Xem kết quả</button>
-  <p id="myopiaResult" style="margin-top:10px; font-weight:bold; color:#0077aa;"></p>
+  <h3>🧮 Kiểm tra nhanh độ cận của bạn</h3>
+  <p>Nhập độ cận (ví dụ: -2.5):</p>
+  <input type="number" id="myopiaValue" step="0.25" placeholder="-2.5" style="padding:5px; border-radius:5px; border:1px solid #ccc;">
+  <button onclick="checkMyopia()">Xem kết quả</button>
+  <p id="myopiaResult" style="margin-top:10px; font-weight:bold; color:#0077aa;"></p>
 </div>
 
 <script>
 function checkMyopia() {
-  const val = parseFloat(document.getElementById("myopiaValue").value);
-  const result = document.getElementById("myopiaResult");
-  if (isNaN(val)) {
-    result.textContent = "❗ Vui lòng nhập số độ cận hợp lệ.";
-    return;
-  }
-  if (val > 0) {
-    result.textContent = "Đây không phải là độ cận. Bạn có thể bị viễn thị hoặc loạn thị.";
-  } else if (val >= -2.75) {
-    result.textContent = "👁️ Bạn thuộc nhóm CẬN NHẸ – Hãy chú ý tư thế và ánh sáng học tập nhé!";
-  } else if (val >= -5.75) {
-    result.textContent = "👓 Bạn thuộc nhóm CẬN TRUNG BÌNH – Nên đeo kính khi học hoặc xem xa.";
-  } else {
-    result.textContent = "⚠️ Bạn thuộc nhóm CẬN NẶNG – Hãy khám định kỳ và bảo vệ mắt cẩn thận!";
-  }
+  const val = parseFloat(document.getElementById("myopiaValue").value);
+  const result = document.getElementById("myopiaResult");
+  if (isNaN(val)) {
+    result.textContent = "❗ Vui lòng nhập số độ cận hợp lệ.";
+    return;
+  }
+  if (val > 0) {
+    result.textContent = "Đây không phải là độ cận. Bạn có thể bị viễn thị hoặc loạn thị.";
+  } else if (val >= -2.75) {
+    result.textContent = "👁️ Bạn thuộc nhóm CẬN NHẸ – Hãy chú ý tư thế và ánh sáng học tập nhé!";
+  } else if (val >= -5.75) {
+    result.textContent = "👓 Bạn thuộc nhóm CẬN TRUNG BÌNH – Nên đeo kính khi học hoặc xem xa.";
+  } else {
+    result.textContent = "⚠️ Bạn thuộc nhóm CẬN NẶNG – Hãy khám định kỳ và bảo vệ mắt cẩn thận!";
+  }
 }
 </script>
 
-        <div class="quote-box">
-          💡 <i>“Đôi mắt sáng – Học tập hiệu quả – Tương lai tươi sáng”</i>
-        </div>
-      </div>
-      <div class="info-image">
-        <img src="https://placehold.co/400x300/eaf8ff/0077aa?text=Thực+phẩm+cho+mắt" alt="Bảo vệ đôi mắt sáng khỏe">
-        <p style="font-style: italic; color:#555;">Học đúng cách – Nhìn xa hơn 🌈</p>
-      </div>
-    </div>
-  </section>
-  
-      <section id="exercise">
-    <h2>🧘 Bài tập thư giãn cho mắt</h2>
-    <p>Hãy thực hiện các bài tập dưới đây mỗi ngày để giúp mắt khỏe mạnh, giảm mỏi sau giờ học hoặc sử dụng máy tính, điện thoại lâu.</p>
+        <div class="quote-box">
+          💡 <i>“Đôi mắt sáng – Học tập hiệu quả – Tương lai tươi sáng”</i>
+        </div>
+      </div>
+      <div class="info-image">
+        <img src="bo-sung-duong-chat-can-thiet-cho-doi-mat-sang.jpg" alt="Bảo vệ đôi mắt sáng khỏe">
+        <p style="font-style: italic; color:#555;">Học đúng cách – Nhìn xa hơn 🌈</p>
+      </div>
+    </div>
+  </section>
+  
+    <!-- 🧘 Bài tập -->
+  <section id="exercise">
+    <h2>🧘 Bài tập thư giãn cho mắt</h2>
+    <p>Hãy thực hiện các bài tập dưới đây mỗi ngày để giúp mắt khỏe mạnh, giảm mỏi sau giờ học hoặc sử dụng máy tính, điện thoại lâu.</p>
 
-    <div class="exercise-step">
-      <h3>👁️ 1. Quy tắc 20–20–20</h3>
-      <p>Mỗi <b>20 phút</b> học tập, hãy nhìn ra xa khoảng <b>6 mét</b> trong <b>20 giây</b>. Điều này giúp cơ mắt thư giãn và giảm căng thẳng.</p>
-      <img src="https://placehold.co/600x200/eaf8ff/0077aa?text=Quy+tắc+20-20-20" alt="Nhìn xa thư giãn mắt">
-    </div>
+    <div class="exercise-step">
+      <h3>👁️ 1. Quy tắc 20–20–20</h3>
+      <p>Mỗi <b>20 phút</b> học tập, hãy nhìn ra xa khoảng <b>6 mét</b> trong <b>20 giây</b>. Điều này giúp cơ mắt thư giãn và giảm căng thẳng.</p>
+      <img src="20240814-161846.jpg" alt="Nhìn xa thư giãn mắt">
+    </div>
 
-    <div class="exercise-step">
-      <h3>🔄 2. Xoay tròng mắt</h3>
-      <p>Ngồi thẳng, nhìn thẳng về phía trước. Di chuyển mắt theo vòng tròn:</p>
-      <ul>
-        <li>Xoay theo chiều kim đồng hồ 10 lần.</li>
-        <li>Nghỉ 10 giây, sau đó xoay ngược lại 10 lần.</li>
-      </ul>
-      <p>Giúp tăng cường lưu thông máu quanh mắt và cải thiện sự linh hoạt của cơ mắt.</p>
-      <img src="https://placehold.co/600x200/eaf8ff/0077aa?text=Xoay+tròng+mắt" alt="Xoay tròng mắt">
-    </div>
+    <div class="exercise-step">
+      <h3>🔄 2. Xoay tròng mắt</h3>
+      <p>Ngồi thẳng, nhìn thẳng về phía trước. Di chuyển mắt theo vòng tròn:</p>
+      <ul>
+        <li>Xoay theo chiều kim đồng hồ 10 lần.</li>
+        <li>Nghỉ 10 giây, sau đó xoay ngược lại 10 lần.</li>
+      </ul>
+      <p>Giúp tăng cường lưu thông máu quanh mắt và cải thiện sự linh hoạt của cơ mắt.</p>
+      <img src="chua-can-thi-bang-cach-tap-nhin-xa-5.jpg" alt="Xoay tròng mắt">
+    </div>
 
-    <div class="exercise-step">
-      <h3>💆 3. Massage quanh mắt</h3>
-      <p>Dùng hai đầu ngón tay trỏ và giữa, xoa nhẹ quanh vùng mắt theo vòng tròn nhỏ trong khoảng <b>1 phút</b>. Giúp giảm mỏi mắt và kích thích tuần hoàn máu.</p>
-      <img src="https://placehold.co/600x200/eaf8ff/0077aa?text=Massage+mắt" alt="Massage mắt nhẹ nhàng">
-    </div>
+    <div class="exercise-step">
+      <h3>💆 3. Massage quanh mắt</h3>
+      <p>Dùng hai đầu ngón tay trỏ và giữa, xoa nhẹ quanh vùng mắt theo vòng tròn nhỏ trong khoảng <b>1 phút</b>. Giúp giảm mỏi mắt và kích thích tuần hoàn máu.</p>
+      <img src="cach-massage-mat-can-1_dcf8df23a03647109205cf04726efc38_grande.jpg" alt="Massage mắt nhẹ nhàng">
+    </div>
 
-    <div class="exercise-step">
-      <h3>🌳 4. Tiếp xúc ánh sáng tự nhiên</h3>
-      <p>Mỗi ngày nên <b>ra ngoài trời ít nhất 15–30 phút</b>. Ánh sáng tự nhiên giúp điều tiết thị lực, giảm nguy cơ cận thị học đường.</p>
-      <img src="https://placehold.co/600x200/eaf8ff/0077aa?text=Ánh+sáng+tự+nhiên" alt="Ra ngoài thư giãn mắt">
-    </div>
+    <div class="exercise-step">
+      <h3>🌳 4. Tiếp xúc ánh sáng tự nhiên</h3>
+      <p>Mỗi ngày nên <b>ra ngoài trời ít nhất 15–30 phút</b>. Ánh sáng tự nhiên giúp điều tiết thị lực, giảm nguy cơ cận thị học đường.</p>
+      <img src="5948_loi-ich-cua-anh-nang-mat-troi1.jpg" alt="Ra ngoài thư giãn mắt">
+    </div>
 
-    <div class="exercise-step">
-      <h3>🌬️ 5. Chớp mắt thường xuyên</h3>
-      <p>Khi học hoặc sử dụng thiết bị điện tử, chúng ta thường chớp mắt ít hơn, khiến mắt khô và mỏi. Hãy nhớ chớp mắt nhẹ nhàng <b>15–20 lần/phút</b> để mắt luôn ẩm và dễ chịu.</p>
-      <img src="https://placehold.co/600x200/eaf8ff/0077aa?text=Chớp+mắt" alt="Chớp mắt thư giãn">
-    </div>
+    <div class="exercise-step">
+      <h3>🌬️ 5. Chớp mắt thường xuyên</h3>
+      <p>Khi học hoặc sử dụng thiết bị điện tử, chúng ta thường chớp mắt ít hơn, khiến mắt khô và mỏi. Hãy nhớ chớp mắt nhẹ nhàng <b>15–20 lần/phút</b> để mắt luôn ẩm và dễ chịu.</p>
+      <img src="images-1690188221833154481643.jpg" alt="Chớp mắt thư giãn">
+    </div>
 
-    <div class="exercise-step">
-      <h3>🕯️ 6. Nhìn theo ngọn nến</h3>
-      <p>Đây là bài tập cổ truyền gọi là <i>Trataka</i> – nhìn vào ngọn nến trong 1–2 phút để rèn luyện khả năng tập trung và kiểm soát cơ mắt.</p>
-      <img src="https://placehold.co/600x200/eaf8ff/0077aa?text=Nhìn+theo+ngọn+nến" alt="Nhìn nến tập trung mắt">
-    </div>
+    <div class="exercise-step">
+      <h3>🕯️ 6. Nhìn theo ngọn nến</h3>
+      <p>Đây là bài tập cổ truyền gọi là <i>Trataka</i> – nhìn vào ngọn nến trong 1–2 phút để rèn luyện khả năng tập trung và kiểm soát cơ mắt.</p>
+      <img src="images.jpeg" alt="Nhìn nến tập trung mắt">
+    </div>
 
-    <div class="quote-box" style="margin-top:20px;">
-      💡 <i>“Chỉ cần 10 phút mỗi ngày, bạn có thể giúp đôi mắt khỏe mạnh và sáng rõ hơn!”</i>
-    </div>
-  </section>
-  
-<section id="quiz">
-  <h2>🧠 Trắc nghiệm: Kiến thức phòng chống cận thị học đường</h2>
-  <p><b>Hãy chọn đáp án đúng nhất cho mỗi câu hỏi nhé!</b></p>
+    <div class="quote-box" style="margin-top:20px;">
+      💡 <i>“Chỉ cần 10 phút mỗi ngày, bạn có thể giúp đôi mắt khỏe mạnh và sáng rõ hơn!”</i>
+    </div>
+  </section>
 
-  <div class="quiz-knowledge">
-        <div class="question-knowledge"><p>1. Khi học bài buổi tối, đèn bàn nên chiếu từ hướng nào?</p>
-      <input type="radio" name="q1" value="Đúng"> Từ bên trái và hơi phía trên<br>
-      <input type="radio" name="q1" value="Sai"> Từ bên phải<br>
-      <input type="radio" name="q1" value="Sai"> Từ phía sau
-    </div>
-    <div class="question-knowledge"><p>2. Khoảng cách ngồi học đúng là bao nhiêu?</p>
-      <input type="radio" name="q2" value="Sai"> 10–20 cm<br>
-      <input type="radio" name="q2" value="Đúng"> 30–40 cm<br>
-      <input type="radio" name="q2" value="Sai"> Càng gần càng nhìn rõ
-    </div>
-    <div class="question-knowledge"><p>3. Quy tắc “20–20–20” có nghĩa là gì?</p>
-      <input type="radio" name="q3" value="Sai"> Mỗi 20 phút, nhìn vào màn hình 20 giây<br>
-      <input type="radio" name="q3" value="Đúng"> Mỗi 20 phút học, nhìn xa 20 feet (~6m) trong 20 giây<br>
-      <input type="radio" name="q3" value="Sai"> Học 20 phút, nghỉ 20 phút
-    </div>
-    <div class="question-knowledge"><p>4. Nếu cảm thấy mỏi mắt khi học, bạn nên làm gì?</p>
-      <input type="radio" name="q4" value="Sai"> Dụi mắt thật mạnh<br>
-      <input type="radio" name="q4" value="Đúng"> Nhắm mắt hoặc massage nhẹ quanh mắt<br>
-      <input type="radio" name="q4" value="Sai"> Tiếp tục học để mắt quen
-    </div>
-    <div class="question-knowledge"><p>5. Học sinh nên kiểm tra thị lực định kỳ bao lâu một lần?</p>
-      <input type="radio" name="q5" value="Sai"> 5 năm/lần<br>
-      <input type="radio" name="q5" value="Sai"> Chỉ khi thấy mờ<br>
-      <input type="radio" name="q5" value="Đúng"> 6 tháng – 1 năm/lần
-    </div>
-    <div class="question-knowledge"><p>6. Ngồi học tư thế nào là đúng?</p>
-      <input type="radio" name="q6" value="Đúng"> Lưng thẳng, đầu hơi cúi, mắt cách vở 30–35 cm<br>
-      <input type="radio" name="q6" value="Sai"> Cúi sát mặt vào vở<br>
-      <input type="radio" name="q6" value="Sai"> Nằm sấp học
-    </div>
-    <div class="question-knowledge"><p>7. Khi đọc sách, ánh sáng thích hợp là:</p>
-      <input type="radio" name="q7" value="Sai"> Ánh sáng mờ để tiết kiệm điện<br>
-      <input type="radio" name="q7" value="Đúng"> Ánh sáng trắng tự nhiên, đủ sáng<br>
-      <input type="radio" name="q7" value="Sai"> Ánh sáng nhấp nháy
-    </div>
-    <div class="question-knowledge"><p>8. Khi xem tivi, nên ngồi cách màn hình bao xa?</p>
-      <input type="radio" name="q8" value="Sai"> 0.5 mét<br>
-      <input type="radio" name="q8" value="Đúng"> Khoảng 2–3 lần đường chéo màn hình<br>
-      <input type="radio" name="q8" value="Sai"> Càng gần càng rõ
-    </div>
-    <div class="question-knowledge"><p>9. Trẻ em nên dành bao nhiêu thời gian ngoài trời mỗi ngày để giảm nguy cơ cận thị?</p>
-      <input type="radio" name="q9" value="Sai"> Không nên ra ngoài<br>
-      <input type="radio" name="q9" value="Đúng"> Ít nhất 60–120 phút<br>
-      <input type="radio" name="q9" value="Sai"> 10 phút là đủ
-    </div>
-    <div class="question-knowledge"><p>10. Nếu kính bị trầy hoặc sai độ, nên làm gì?</p>
-      <input type="radio" name="q10" value="Sai"> Tiếp tục dùng cho quen<br>
-      <input type="radio" name="q10" value="Sai"> Tự mài lại ở nhà<br>
-      <input type="radio" name="q10" value="Đúng"> Đến cửa hàng kính hoặc bác sĩ nhãn khoa để kiểm tra
-    </div>
-    <div class="question-knowledge"><p>11. Ánh sáng tự nhiên có lợi gì cho mắt?</p>
-      <input type="radio" name="q11" value="Sai"> Khiến mắt dễ mỏi<br>
-      <input type="radio" name="q11" value="Sai"> Không có tác dụng<br>
-      <input type="radio" name="q11" value="Đúng"> Giúp mắt điều tiết tốt, giảm nguy cơ cận thị
-    </div>
-    <div class="question-knowledge"><p>12. Khi viết bài, khoảng cách từ mắt đến bàn nên là:</p>
-      <input type="radio" name="q12" value="Sai"> 15 cm<br>
-      <input type="radio" name="q12" value="Đúng"> Khoảng 30–40 cm<br>
-      <input type="radio" name="q12" value="Sai"> 60 cm
-    </div>
-    <div class="question-knowledge"><p>13. Cận thị học đường chủ yếu do nguyên nhân nào?</p>
-      <input type="radio" name="q13" value="Sai"> Ăn ít cà rốt<br>
-      <input type="radio" name="q13" value="Đúng"> Thói quen học tập, tư thế và ánh sáng sai<br>
-      <input type="radio" name="q13" value="Sai"> Không rửa mặt buổi sáng
-    </div>
-    <div class="question-knowledge"><p>14. Khi học trực tuyến, bạn nên làm gì để bảo vệ mắt?</p>
-      <input type="radio" name="q14" value="Đúng"> Giữ khoảng cách, điều chỉnh ánh sáng, nghỉ đều<br>
-      <input type="radio" name="q14" value="Sai"> Học trong phòng tối cho dễ tập trung<br>
-      <input type="radio" name="q14" value="Sai"> Dán mắt vào màn hình để không bỏ sót bài
-    </div>
-    <div class="question-knowledge"><p>15. Dụi mắt bằng tay bẩn có thể gây ra điều gì?</p>
-      <input type="radio" name="q15" value="Sai"> Giúp mắt đỡ ngứa<br>
-      <input type="radio" name="q15" value="Đúng"> Gây viêm nhiễm, đau rát, ảnh hưởng giác mạc<br>
-      <input type="radio" name="q15" value="Sai"> Không sao cả
-    </div>
+ <!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trắc nghiệm phòng chống cận thị học đường</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f9f9f9; color: #003366; }
 
-    <button onclick="checkQuiz()">📘 Nộp bài</button>
-    <div class="result" id="quizResult"></div>
-  </div>
+    /* ===== PHẦN TRẮC NGHIỆM ===== */
+    .quiz {
+      background: #f9fdff;
+      border: 2px solid #cce7f3;
+      border-radius: 10px;
+      padding: 25px;
+      max-width: 850px;
+      margin: 20px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .question {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      border-left: 5px solid #0099cc;
+      transition: background 0.3s;
+    }
+    .question:hover { background: #f0faff; }
+    .question p { font-weight: 600; margin-bottom: 5px; }
 
-    <div class="leaderboard">
-    <h2>🏆 Bảng xếp hạng Top 5</h2>
-    <table id="leaderboardTable">
-      <thead><tr><th>Thứ hạng</th><th>Tên</th><th>Điểm</th></tr></thead>
-      <tbody><tr><td colspan="3">Chưa có dữ liệu</td></tr></tbody>
-    </table>
-  </div>
+    button {
+      background-color: #0077aa;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.3s;
+    }
+    button:hover {
+      background-color: #005f80;
+      transform: scale(1.05);
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #0077aa;
+      line-height: 1.6;
+    }
 
-    <h2>📚 Thắc mắc thường gặp về cận thị học đường</h2>
-  <table>
-    <tr><th>Câu hỏi</th><th>Trả lời</th></tr>
-    <tr><td>Có chữa khỏi hoàn toàn không?</td><td>Hiện chưa, chỉ có thể kiểm soát tiến triển bằng thay đổi thói quen và khám định kỳ.</td></tr>
-    <tr><td>Đeo kính có làm cận nặng hơn không?</td><td>Không. Đeo kính đúng độ giúp mắt nhìn rõ, không làm cận nặng hơn.</td></tr>
-    <tr><td>Học nhiều có gây cận không?</td><td>Không trực tiếp, nhưng học sai tư thế và thiếu nghỉ ngơi sẽ làm tăng nguy cơ.</td></tr>
-    <tr><td>Chơi điện thoại, máy tính nhiều có nguy cơ cận không?</td><td>Có. Nên hạn chế và tuân thủ quy tắc 20–20–20.</td></tr>
-    <tr><td>Chơi thể thao ngoài trời có giúp giảm cận không?</td><td>Có. Ánh sáng tự nhiên và vận động ngoài trời ít nhất 2 giờ/ngày giúp phòng cận.</td></tr>
-  </table>
+    /* ===== Q&A ===== */
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 12px; text-align: left; }
+    th { background-color: #3399ff; color: white; }
+    tr:nth-child(even) { background-color: #e6f0ff; }
 
-  <div class="contact">
-    <h2>Liên hệ & góp ý</h2>
-    <p>Email: <a href="mailto:hotro@eyecare.vn">hotro@eyecare.vn</a></p>
-    <p>Facebook: <a href="https://www.facebook.com/eyecare.vn" target="_blank">Eyecare</a></p>
-  </div>
-</section>
+    /* ===== BẢNG XẾP HẠNG ===== */
+    .leaderboard {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 15px;
+      background-color: #e6f0ff;
+      border: 2px solid #0099cc;
+      border-radius: 10px;
+    }
+    .leaderboard table { width: 100%; border-collapse: collapse; }
+    .leaderboard th, .leaderboard td { border: 1px solid #0099cc; padding: 8px; text-align: center; }
+    .leaderboard th { background-color: #0077aa; color: white; }
 
-  <footer>
-    © 2025 - Nhóm Dự án Khoa học Kỹ thuật | Email: duan.canthi@gmail.com
-  </footer>
+    /* ===== LIÊN HỆ ===== */
+    .contact { margin-top: 20px; padding: 15px; border: 1px solid #3399ff; background-color: #e6f0ff; }
+    a { color: #003366; text-decoration: none; font-weight: bold; }
+    a:hover { text-decoration: underline; }
 
-  <script>
-    const answers = {
-      // Tất cả các đáp án đúng đều có value="Đúng" trong HTML, nên logic này là chính xác
-      q1:"Đúng",q2:"Đúng",q3:"Đúng",q4:"Đúng",q5:"Đúng",
-      q6:"Đúng",q7:"Đúng",q8:"Đúng",q9:"Đúng",q10:"Đúng",
-      q11:"Đúng",q12:"Đúng",q13:"Đúng",q14:"Đúng",q15:"Đúng"
-    };
+    footer { text-align: center; margin-top: 30px; color: #555; }
+  </style>
+</head>
+<body>
 
-    // Hàm nộp bài
-    function checkQuiz() {
-      const userName = prompt("Nhập tên của bạn:") || "Người chơi";
-      let score = 0;
-      let feedback = "";
+  <h2>🧠 Trắc nghiệm: Kiến thức phòng chống cận thị học đường</h2>
+  <p><b>Hãy chọn đáp án đúng nhất cho mỗi câu hỏi nhé!</b></p>
 
-      for (let q in answers) {
-        const options = document.getElementsByName(q);
-        let chosen = "";
-        options.forEach(o => { if (o.checked) chosen = o.value; });
+  <div class="quiz">
+    <!-- CÁC CÂU HỎI -->
+    <div class="question"><p>1. Khi học bài buổi tối, đèn bàn nên chiếu từ hướng nào?</p>
+      <input type="radio" name="q1" value="Đúng"> Từ bên trái và hơi phía trên<br>
+      <input type="radio" name="q1" value="Sai"> Từ bên phải<br>
+      <input type="radio" name="q1" value="Sai"> Từ phía sau
+    </div>
+    <div class="question"><p>2. Khoảng cách ngồi học đúng là bao nhiêu?</p>
+      <input type="radio" name="q2" value="Sai"> 10–20 cm<br>
+      <input type="radio" name="q2" value="Đúng"> 30–40 cm<br>
+      <input type="radio" name="q2" value="Sai"> Càng gần càng nhìn rõ
+    </div>
+    <div class="question"><p>3. Quy tắc “20–20–20” có nghĩa là gì?</p>
+      <input type="radio" name="q3" value="Sai"> Mỗi 20 phút, nhìn vào màn hình 20 giây<br>
+      <input type="radio" name="q3" value="Đúng"> Mỗi 20 phút học, nhìn xa 20 feet (~6m) trong 20 giây<br>
+      <input type="radio" name="q3" value="Sai"> Học 20 phút, nghỉ 20 phút
+    </div>
+    <div class="question"><p>4. Nếu cảm thấy mỏi mắt khi học, bạn nên làm gì?</p>
+      <input type="radio" name="q4" value="Sai"> Dụi mắt thật mạnh<br>
+      <input type="radio" name="q4" value="Đúng"> Nhắm mắt hoặc massage nhẹ quanh mắt<br>
+      <input type="radio" name="q4" value="Sai"> Tiếp tục học để mắt quen
+    </div>
+    <div class="question"><p>5. Học sinh nên kiểm tra thị lực định kỳ bao lâu một lần?</p>
+      <input type="radio" name="q5" value="Sai"> 5 năm/lần<br>
+      <input type="radio" name="q5" value="Sai"> Chỉ khi thấy mờ<br>
+      <input type="radio" name="q5" value="Đúng"> 6 tháng – 1 năm/lần
+    </div>
+    <div class="question"><p>6. Ngồi học tư thế nào là đúng?</p>
+      <input type="radio" name="q6" value="Đúng"> Lưng thẳng, đầu hơi cúi, mắt cách vở 30–35 cm<br>
+      <input type="radio" name="q6" value="Sai"> Cúi sát mặt vào vở<br>
+      <input type="radio" name="q6" value="Sai"> Nằm sấp học
+    </div>
+    <div class="question"><p>7. Khi đọc sách, ánh sáng thích hợp là:</p>
+      <input type="radio" name="q7" value="Sai"> Ánh sáng mờ để tiết kiệm điện<br>
+      <input type="radio" name="q7" value="Đúng"> Ánh sáng trắng tự nhiên, đủ sáng<br>
+      <input type="radio" name="q7" value="Sai"> Ánh sáng nhấp nháy
+    </div>
+    <div class="question"><p>8. Khi xem tivi, nên ngồi cách màn hình bao xa?</p>
+      <input type="radio" name="q8" value="Sai"> 0.5 mét<br>
+      <input type="radio" name="q8" value="Đúng"> Khoảng 2–3 lần đường chéo màn hình<br>
+      <input type="radio" name="q8" value="Sai"> Càng gần càng rõ
+    </div>
+    <div class="question"><p>9. Trẻ em nên dành bao nhiêu thời gian ngoài trời mỗi ngày để giảm nguy cơ cận thị?</p>
+      <input type="radio" name="q9" value="Sai"> Không nên ra ngoài<br>
+      <input type="radio" name="q9" value="Đúng"> Ít nhất 60–120 phút<br>
+      <input type="radio" name="q9" value="Sai"> 10 phút là đủ
+    </div>
+    <div class="question"><p>10. Nếu kính bị trầy hoặc sai độ, nên làm gì?</p>
+      <input type="radio" name="q10" value="Sai"> Tiếp tục dùng cho quen<br>
+      <input type="radio" name="q10" value="Sai"> Tự mài lại ở nhà<br>
+      <input type="radio" name="q10" value="Đúng"> Đến cửa hàng kính hoặc bác sĩ nhãn khoa để kiểm tra
+    </div>
+    <div class="question"><p>11. Ánh sáng tự nhiên có lợi gì cho mắt?</p>
+      <input type="radio" name="q11" value="Sai"> Khiến mắt dễ mỏi<br>
+      <input type="radio" name="q11" value="Sai"> Không có tác dụng<br>
+      <input type="radio" name="q11" value="Đúng"> Giúp mắt điều tiết tốt, giảm nguy cơ cận thị
+    </div>
+    <div class="question"><p>12. Khi viết bài, khoảng cách từ mắt đến bàn nên là:</p>
+      <input type="radio" name="q12" value="Sai"> 15 cm<br>
+      <input type="radio" name="q12" value="Đúng"> Khoảng 30–40 cm<br>
+      <input type="radio" name="q12" value="Sai"> 60 cm
+    </div>
+    <div class="question"><p>13. Cận thị học đường chủ yếu do nguyên nhân nào?</p>
+      <input type="radio" name="q13" value="Sai"> Ăn ít cà rốt<br>
+      <input type="radio" name="q13" value="Đúng"> Thói quen học tập, tư thế và ánh sáng sai<br>
+      <input type="radio" name="q13" value="Sai"> Không rửa mặt buổi sáng
+    </div>
+    <div class="question"><p>14. Khi học trực tuyến, bạn nên làm gì để bảo vệ mắt?</p>
+      <input type="radio" name="q14" value="Đúng"> Giữ khoảng cách, điều chỉnh ánh sáng, nghỉ đều<br>
+      <input type="radio" name="q14" value="Sai"> Học trong phòng tối cho dễ tập trung<br>
+      <input type="radio" name="q14" value="Sai"> Dán mắt vào màn hình để không bỏ sót bài
+    </div>
+    <div class="question"><p>15. Dụi mắt bằng tay bẩn có thể gây ra điều gì?</p>
+      <input type="radio" name="q15" value="Sai"> Giúp mắt đỡ ngứa<br>
+      <input type="radio" name="q15" value="Đúng"> Gây viêm nhiễm, đau rát, ảnh hưởng giác mạc<br>
+      <input type="radio" name="q15" value="Sai"> Không sao cả
+    </div>
 
-        if (chosen === answers[q]) {
-          score++;
-          feedback += `<p>✅ Câu ${q.slice(1)} đúng!</p>`;
-        } else {
-          feedback += `<p>❌ Câu ${q.slice(1)} sai. Đáp án đúng là: ${answers[q]}</p>`;
-        }
-      }
+    <button onclick="checkQuiz()">📘 Nộp bài</button>
+    <div class="result" id="quizResult"></div>
+  </div>
 
-      let message = "";
-      if (score === 15) message = "🎉 Xuất sắc! Bạn hiểu biết rất tốt về bảo vệ mắt.";
-      else if (score >= 10) message = "👍 Rất tốt! Bạn đã nắm vững phần lớn kiến thức.";
-      else message = "📖 Hãy xem lại các kiến thức để bảo vệ mắt tốt hơn nhé!";
+  <!-- BẢNG XẾP HẠNG -->
+  <div class="leaderboard">
+    <h2>🏆 Bảng xếp hạng Top 5</h2>
+    <table id="leaderboardTable">
+      <thead><tr><th>Thứ hạng</th><th>Tên</th><th>Điểm</th></tr></thead>
+      <tbody><tr><td colspan="3">Chưa có dữ liệu</td></tr></tbody>
+    </table>
+  </div>
 
-      document.getElementById("quizResult").innerHTML =
-        `<h3>Kết quả của ${userName}:</h3>Bạn đúng <b>${score}/15 câu</b>.<br>${message}<br>${feedback}`;
+  <!-- Q&A -->
+  <h2>📚 Thắc mắc thường gặp về cận thị học đường</h2>
+  <table>
+    <tr><th>Câu hỏi</th><th>Trả lời</th></tr>
+    <tr><td>Có chữa khỏi hoàn toàn không?</td><td>Hiện chưa, chỉ có thể kiểm soát tiến triển bằng thay đổi thói quen và khám định kỳ.</td></tr>
+    <tr><td>Đeo kính có làm cận nặng hơn không?</td><td>Không. Đeo kính đúng độ giúp mắt nhìn rõ, không làm cận nặng hơn.</td></tr>
+    <tr><td>Học nhiều có gây cận không?</td><td>Không trực tiếp, nhưng học sai tư thế và thiếu nghỉ ngơi sẽ làm tăng nguy cơ.</td></tr>
+    <tr><td>Chơi điện thoại, máy tính nhiều có nguy cơ cận không?</td><td>Có. Nên hạn chế và tuân thủ quy tắc 20–20–20.</td></tr>
+    <tr><td>Chơi thể thao ngoài trời có giúp giảm cận không?</td><td>Có. Ánh sáng tự nhiên và vận động ngoài trời ít nhất 2 giờ/ngày giúp phòng cận.</td></tr>
+  </table>
 
-      updateLeaderboard(userName, score);
-    }
+  <div class="contact">
+    <h2>Liên hệ & góp ý</h2>
+    <p>Email: <a href="mailto:hotro@eyecare.vn">hotro@eyecare.vn</a></p>
+    <p>Facebook: <a href="https://www.facebook.com/eyecare.vn" target="_blank">Eyecare</a></p>
+  </div>
 
-    // Cập nhật bảng xếp hạng
-    function updateLeaderboard(name, score) {
-      let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-      leaderboard.push({ name: name, score: score });
+  <footer>
+    © 2025 - Nhóm Dự án Khoa học Kỹ thuật | Email: duan.canthi@gmail.com
+  </footer>
 
-      // Sắp xếp theo điểm giảm dần (Điểm cao nhất lên đầu)
-      leaderboard.sort((a, b) => b.score - a.score);
+  <script>
+    const answers = {
+      q1:"Đúng",q2:"Đúng",q3:"Đúng",q4:"Đúng",q5:"Đúng",
+      q6:"Đúng",q7:"Đúng",q8:"Đúng",q9:"Đúng",q10:"Đúng",
+      q11:"Đúng",q12:"Đúng",q13:"Đúng",q14:"Đúng",q15:"Đúng"
+    };
 
-      // Giữ lại Top 5
-      leaderboard = leaderboard.slice(0, 5);
+    // Hàm nộp bài
+    function checkQuiz() {
+      const userName = prompt("Nhập tên của bạn:") || "Người chơi";
+      let score = 0;
+      let feedback = "";
 
-      // Lưu lại vào Local Storage
-      localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+      for (let q in answers) {
+        const options = document.getElementsByName(q);
+        let chosen = "";
+        options.forEach(o => { if (o.checked) chosen = o.value; });
 
-      // Hiển thị lại bảng xếp hạng
-      displayLeaderboard(leaderboard);
-    }
+        if (chosen === answers[q]) {
+          score++;
+          feedback += <p>✅ Câu ${q.slice(1)} đúng!</p>;
+        } else {
+          feedback += <p>❌ Câu ${q.slice(1)} sai. Đáp án đúng là: ${answers[q]}</p>;
+        }
+      }
 
-    // Hàm hiển thị Bảng xếp hạng
-    function displayLeaderboard(lb) {
-      const tableBody = document.querySelector("#leaderboardTable tbody");
-      tableBody.innerHTML = "";
+      let message = "";
+      if (score === 15) message = "🎉 Xuất sắc! Bạn hiểu biết rất tốt về bảo vệ mắt.";
+      else if (score >= 10) message = "👍 Rất tốt! Bạn đã nắm vững phần lớn kiến thức.";
+      else message = "📖 Hãy xem lại các kiến thức để bảo vệ mắt tốt hơn nhé!";
 
-      if (lb.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="3">Chưa có dữ liệu</td></tr>';
-        return;
-      }
+      document.getElementById("quizResult").innerHTML =
+        <h3>Kết quả của ${userName}:</h3>Bạn đúng <b>${score}/15 câu</b>.<br>${message}<br>${feedback};
 
-      lb.forEach((item, index) => {
-        const row = tableBody.insertRow();
-        const rankCell = row.insertCell();
-        const nameCell = row.insertCell();
-        const scoreCell = row.insertCell();
+      updateLeaderboard(userName, score);
+    }
 
-        rankCell.textContent = index + 1;
-        nameCell.textContent = item.name;
-        scoreCell.textContent = item.score;
+    // Cập nhật bảng xếp hạng
+    function updateLeaderboard(name, score) {
+      let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+      leaderboard.push({ name, score });
+      leaderboard.sort((a,b)=>b.score-a.score);
+      leaderboard = leaderboard.slice(0,5);
+      localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+      renderLeaderboard();
+    }
 
-        if (index === 0) {
-          row.style.backgroundColor = '#fff3cd'; // Vàng cho hạng 1
-          nameCell.innerHTML = `🥇 <b>${item.name}</b>`;
-        }
-      });
-    }
-
-    // Tải Bảng xếp hạng khi trang được tải
-    function loadLeaderboard() {
-      let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-      displayLeaderboard(leaderboard);
-    }
-
-    // Chạy hàm load khi DOM đã sẵn sàng
-    document.addEventListener('DOMContentLoaded', loadLeaderboard);
-  </script>
-
-</body>
-</html>
-
+    function renderLeaderboard() {
+      const data = JSON.parse(localStorage.getItem("leaderboard")) || [];
+      const tbody = document.querySelector("#leaderboardTable tbody");
+      tbody.innerHTML = "";
+      if (data.length === 0)
+        tbody.innerHTML = <tr><td colspan="3">Chưa có dữ liệu</td></tr>;
+      else data.forEach((e, i) => {
+        tbody.innerHTML += <tr><td>${i+1}</td><td>${e.name}</td><td>${e.score}</td></tr>;
+      });
+    }
