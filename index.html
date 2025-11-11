@@ -170,7 +170,14 @@
     <section id="exercise">
         <h2>🧘 Bài tập thư giãn cho mắt</h2>
         <p>Hãy thực hiện các bài tập dưới đây mỗi ngày để giúp mắt khỏe mạnh, giảm mỏi sau giờ học hoặc sử dụng máy tính, điện thoại lâu.</p>
-
+        
+    <div style="margin: 20px 0; padding: 15px; border: 1px solid #0099cc; border-radius: 8px; background-color: #f0faff; text-align: center;">
+        <h3 style="color:#0077aa; margin-top: 0;">⏱️ Kích hoạt Quy tắc 20–20–20</h3>
+        <p>Bấm **BẮT ĐẦU**. Hệ thống sẽ nhắc bạn nghỉ mắt sau mỗi 20 phút.</p>
+        <button id="startTimerBtn" onclick="toggleTimer(true)" style="background-color: #5cb85c; color: white; padding: 10px 20px; border-radius: 5px; margin-right: 10px; border: none; font-size: 1em; cursor: pointer;">BẮT ĐẦU</button>
+        <button id="stopTimerBtn" onclick="toggleTimer(false)" disabled style="background-color: #d9534f; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-size: 1em; cursor: not-allowed; opacity: 0.6;">DỪNG</button>
+    </div>
+        
         <div class="exercise-step">
             <h3>👁️ 1. Quy tắc 20–20–20</h3>
             <p>Mỗi <b>20 phút</b> học tập, hãy nhìn ra xa khoảng <b>6 mét</b> trong <b>20 giây</b>. Điều này giúp cơ mắt thư giãn và giảm căng thẳng.</p>
@@ -368,6 +375,61 @@
     <audio id="sound-alert" src="https://assets.mixkit.co/sfx/preview/mixkit-alert-quick-chime-766.mp3"></audio>
 
     <script>
+        
+        // --- TIMER 20-20-20 (Mỗi 20 phút, nghỉ 20 giây) ---
+    let timerInterval = null; // Biến lưu trữ ID của setInterval
+    const REMINDER_DURATION = 20000; // 20 giây (thời gian hiển thị nhắc nhở)
+    const STUDY_DURATION = 1200000; // 20 phút = 1,200,000 miligiây
+
+    function toggleTimer(start) {
+        const reminderBox = document.getElementById("reminder");
+        const startBtn = document.getElementById("startTimerBtn");
+        const stopBtn = document.getElementById("stopTimerBtn");
+
+        if (start) {
+            // 1. Khởi động Timer
+            timerInterval = setInterval(showReminder, STUDY_DURATION);
+            
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+            startBtn.style.opacity = 0.6;
+            stopBtn.style.opacity = 1;
+            stopBtn.style.cursor = 'pointer';
+            startBtn.style.cursor = 'not-allowed';
+            
+            alert("20-20-20 Timer đã được kích hoạt! Nhắc nhở đầu tiên sau 20 phút.");
+            
+        } else {
+            // 2. Dừng Timer
+            clearInterval(timerInterval);
+            timerInterval = null;
+            
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            startBtn.style.opacity = 1;
+            stopBtn.style.opacity = 0.6;
+            startBtn.style.cursor = 'pointer';
+            stopBtn.style.cursor = 'not-allowed';
+
+            reminderBox.style.display = 'none'; // Đảm bảo ẩn nếu đang hiển thị
+            alert("20-20-20 Timer đã dừng. Hãy tự chủ động nghỉ mắt nhé.");
+        }
+    }
+
+    function showReminder() {
+        const reminderBox = document.getElementById("reminder");
+        
+        // Hiện thông báo
+        reminderBox.style.display = 'block';
+        reminderBox.classList.add('blink-alert'); // Dùng hiệu ứng nhấp nháy đã có
+
+        // Đặt hẹn giờ để ẩn thông báo sau 20 giây
+        setTimeout(() => {
+            reminderBox.style.display = 'none';
+            reminderBox.classList.remove('blink-alert');
+        }, REMINDER_DURATION);
+    }
+        
         // --- QUIZ 1: Nguy cơ cận thị (Đúng/Sai) ---
         let riskScore = 0; // Đổi tên biến để tránh xung đột
         let riskAnsweredCount = 0;
