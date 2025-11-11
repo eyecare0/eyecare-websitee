@@ -44,18 +44,6 @@
       display: inline-block;
       padding-bottom: 5px;
     }
-    button {
-      background-color: #0077aa;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    button:hover {
-      background-color: #005f80;
-    }
     footer {
       text-align: center;
       background-color: #0099cc;
@@ -74,156 +62,44 @@
       border-radius: 5px;
       display: none;
     }
-    img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin: 10px 0;
+
+    /* --- Quiz --- */
+    #eye-quiz-animated-sound ol li { margin-bottom: 15px; line-height: 1.6; }
+    #eye-quiz-animated-sound button { 
+      margin-right: 10px; 
+      margin-top: 5px; 
+      padding: 5px 12px; 
+      border: none; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-weight: bold; 
     }
-    .quiz {
-      background-color: #f8f9fa;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 20px;
+    #eye-quiz-animated-sound button:hover { opacity: 0.85; }
+    #eye-quiz-animated-sound button:disabled { opacity: 0.5; cursor: not-allowed; }
+    #eye-quiz-animated-sound button:nth-child(1) { background:#0077aa; color:white; }
+    #eye-quiz-animated-sound button:nth-child(2) { background:#aaa; color:white; }
+
+    .animated-result {
       margin-top: 20px;
+      padding: 15px;
+      border-left: 4px solid #0077aa;
+      border-radius: 6px;
+      display: none;
+      transform: translateY(30px) scale(0.8);
+      opacity: 0;
+      transition: all 0.6s ease-out;
     }
-    .question {
-      margin-bottom: 15px;
-    }
-    .result {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #0077aa;
-    }
-    canvas {
+    .animated-result.show-result {
       display: block;
-      margin: 20px auto;
+      transform: translateY(0) scale(1);
+      opacity: 1;
     }
-
-    /* --- Giới thiệu --- */
-    .intro-content {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    .intro-text {
-      flex: 1 1 450px;
-    }
-
-    .intro-text h3 {
-      color: #005f80;
-      font-weight: 600;
-      margin-top: 5px;
-    }
-
-    .intro-text p {
-      line-height: 1.6;
-    }
-
-    .intro-text ul {
-      margin-top: 10px;
-      padding-left: 20px;
-    }
-
-    .intro-image {
-      flex: 1 1 350px;
-      text-align: center;
-    }
-
-    .intro-image img {
-      width: 100%;
-      max-width: 400px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.4s ease;
-    }
-
-    .intro-image img:hover {
-      transform: scale(1.05);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* --- Kiến thức (1 thể) --- */
-    .info-container {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      gap: 30px;
-      margin-top: 20px;
-    }
-
-    .info-text {
-      flex: 1 1 500px;
-      background: #f9fdff;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      line-height: 1.7;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    .info-text h3 {
-      color: #0077aa;
-      margin-top: 20px;
-    }
-
-    .info-text ul {
-      padding-left: 25px;
-      margin: 10px 0;
-    }
-
-    .quote-box {
-      margin-top: 20px;
-      background: #e0f7fa;
-      border-left: 5px solid #00acc1;
-      padding: 10px 15px;
-      border-radius: 8px;
-      color: #006064;
-      font-weight: 500;
-    }
-
-    .info-image {
-      flex: 1 1 350px;
-      text-align: center;
-    }
-
-    .info-image img {
-      width: 100%;
-      max-width: 380px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      transition: transform 0.4s ease;
-    }
-
-    .info-image img:hover {
-      transform: scale(1.05);
-    }
-
-    /* --- Bài tập thư giãn --- */
-    ol li {
-      margin-bottom: 10px;
-    }
-
-    @media (max-width: 700px) {
-      .intro-content, .info-container {
-        flex-direction: column-reverse;
-        text-align: center;
-      }
-      .intro-text, .info-text {
-        text-align: left;
-      }
-    }
+    .blink-alert { animation: blink 1s infinite; }
+    @keyframes blink { 0%,50%,100%{opacity:1;}25%,75%{opacity:0.3;} }
   </style>
 </head>
-<body>
 
+<body>
   <header>
     <h1>PHÒNG CHỐNG CẬN THỊ HỌC ĐƯỜNG</h1>
     <p>Website tuyên truyền, hướng dẫn và hỗ trợ chăm sóc mắt cho học sinh</p>
@@ -239,126 +115,92 @@
   <div class="reminder" id="reminder">
     ⏱️ Đã 20 phút rồi! Hãy nhìn xa 20 giây để cho mắt nghỉ nhé! 👀
   </div>
-  
-<!-- 🕹 Quiz tương tác kiểm tra cận thị với âm thanh -->
-<section id="eye-quiz-animated-sound">
-  <h2>🧐 Bạn có nguy cơ cận thị không?</h2>
-  <p>Chọn "Đúng" hoặc "Sai" cho mỗi câu hỏi và xem kết quả ngay!</p>
 
-  <ol id="quiz-list">
-    <li>
-      Khi đọc sách hoặc nhìn điện thoại, bạn thường phải <b>cúi sát sách/máy xuống</b> mới nhìn rõ chữ.<br>
-      <button onclick="answer(this, true)">✅ Có</button>
-      <button onclick="answer(this, false)">❌ Không</button>
-    </li>
-    <li>
-      Bạn thường thấy <b>nhìn bảng, bảng điện tử ở lớp mờ nhòe</b> hoặc phải nheo mắt mới thấy.<br>
-      <button onclick="answer(this, true)">✅ Có</button>
-      <button onclick="answer(this, false)">❌ Không</button>
-    </li>
-    <li>
-      Khi xem tivi hoặc điện thoại lâu, mắt bạn <b>nhức, mỏi hoặc đỏ</b>.<br>
-      <button onclick="answer(this, true)">✅ Có</button>
-      <button onclick="answer(this, false)">❌ Không</button>
-    </li>
-    <li>
-      Bạn thường <b>ngồi quá gần tivi hoặc màn hình máy tính</b> để nhìn rõ.<br>
-      <button onclick="answer(this, true)">✅ Có</button>
-      <button onclick="answer(this, false)">❌ Không</button>
-    </li>
-    <li>
-      Khi đọc sách, bạn cảm thấy <b>chữ nhòe hoặc phải đọc đi đọc lại</b> mới hiểu.<br>
-      <button onclick="answer(this, true)">✅ Không</button>
-      <button onclick="answer(this, false)">❌ Có</button>
-    </li>
-    <li>
-      Bạn thấy mắt thường xuyên <b>khô, chảy nước mắt hoặc chớp không đều</b> sau khi dùng điện thoại/ máy tính.<br>
-      <button onclick="answer(this, true)">✅ Không</button>
-      <button onclick="answer(this, false)">❌ Có</button>
-    </li>
-    <li>
-      Khi tham gia các hoạt động ngoài trời, bạn cảm thấy <b>khó nhìn các vật ở xa</b> (bảng, biển báo… ).<br>
-      <button onclick="answer(this, true)">✅ Không</button>
-      <button onclick="answer(this, false)">❌ Có</button>
-    </li>
-  </ol>
+  <!-- 🕹 Quiz tương tác kiểm tra cận thị với âm thanh -->
+  <section id="eye-quiz-animated-sound">
+    <h2>🧐 Bạn có nguy cơ cận thị không?</h2>
+    <p>Chọn "Đúng" hoặc "Sai" cho mỗi câu hỏi và xem kết quả ngay!</p>
 
-  <div id="quiz-result" class="animated-result">
-    <span id="result-text"></span>
-  </div>
-</section>
+    <ol id="quiz-list">
+      <li>Khi đọc sách hoặc nhìn điện thoại, bạn thường phải <b>cúi sát</b> xuống mới nhìn rõ.<br>
+        <button onclick="answer(this, true)">✅ Có</button>
+        <button onclick="answer(this, false)">❌ Không</button>
+      </li>
+      <li>Bạn thường thấy <b>nhìn bảng ở lớp mờ nhòe</b> hoặc phải nheo mắt mới thấy.<br>
+        <button onclick="answer(this, true)">✅ Có</button>
+        <button onclick="answer(this, false)">❌ Không</button>
+      </li>
+      <li>Khi xem tivi hoặc điện thoại lâu, mắt bạn <b>nhức, mỏi hoặc đỏ</b>.<br>
+        <button onclick="answer(this, true)">✅ Có</button>
+        <button onclick="answer(this, false)">❌ Không</button>
+      </li>
+      <li>Bạn thường <b>ngồi quá gần màn hình</b> để nhìn rõ.<br>
+        <button onclick="answer(this, true)">✅ Có</button>
+        <button onclick="answer(this, false)">❌ Không</button>
+      </li>
+      <li>Khi đọc sách, bạn cảm thấy <b>chữ nhòe hoặc phải đọc lại nhiều lần</b>.<br>
+        <button onclick="answer(this, true)">✅ Có</button>
+        <button onclick="answer(this, false)">❌ Không</button>
+      </li>
+      <li>Bạn thấy mắt <b>khô, chảy nước mắt</b> sau khi dùng điện thoại lâu.<br>
+        <button onclick="answer(this, true)">✅ Có</button>
+        <button onclick="answer(this, false)">❌ Không</button>
+      </li>
+      <li>Khi ở ngoài trời, bạn cảm thấy <b>khó nhìn vật ở xa</b> (bảng, biển báo…).<br>
+        <button onclick="answer(this, true)">✅ Có</button>
+        <button onclick="answer(this, false)">❌ Không</button>
+      </li>
+    </ol>
 
-<!-- Thư viện confetti -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <div id="quiz-result" class="animated-result">
+      <span id="result-text"></span>
+    </div>
+  </section>
 
-<!-- Âm thanh -->
-<audio id="sound-success" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-notification-951.mp3"></audio>
-<audio id="sound-alert" src="https://assets.mixkit.co/sfx/preview/mixkit-alert-quick-chime-766.mp3"></audio>
+  <!-- Thư viện confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
-<script>
-let score = 0;
-let answeredCount = 0;
+  <!-- Âm thanh -->
+  <audio id="sound-success" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-notification-951.mp3"></audio>
+  <audio id="sound-alert" src="https://assets.mixkit.co/sfx/preview/mixkit-alert-quick-chime-766.mp3"></audio>
 
-function answer(btn, isCorrect) {
-  let parent = btn.parentElement;
-  let buttons = parent.querySelectorAll("button");
-  buttons.forEach(b => b.disabled = true);
+  <script>
+  let score = 0;
+  let answeredCount = 0;
 
-  if(isCorrect) score++;
-  answeredCount++;
+  function answer(btn, isCorrect) {
+    let parent = btn.parentElement;
+    let buttons = parent.querySelectorAll("button");
+    buttons.forEach(b => b.disabled = true);
 
-  if(answeredCount === 7) {
-    const resultBox = document.getElementById("quiz-result");
-    const resultText = document.getElementById("result-text");
-    const soundSuccess = document.getElementById("sound-success");
-    const soundAlert = document.getElementById("sound-alert");
-    resultBox.classList.add("show-result");
+    if (isCorrect) score++;
+    answeredCount++;
 
-    if(score >= 3) {
-      resultText.innerHTML = 💡 Bạn trả lời ${score}/7 câu đúng.<br><b>Nguy cơ cận thị cao!</b> Hãy đi kiểm tra mắt và chăm sóc mắt khoa học.;
-      resultBox.style.background = "#ffe7e7";
-      resultBox.style.borderLeftColor = "#ff5555";
-      resultBox.classList.add("blink-alert");
-      soundAlert.play();
-    } else {
-      resultText.innerHTML = 🎉 Bạn trả lời ${score}/7 câu đúng.<br>Mắt bạn hiện tại <b>tương đối an toàn</b>! Hãy duy trì thói quen tốt.;
-      resultBox.style.background = "#e7ffe7";
-      resultBox.style.borderLeftColor = "#55aa55";
-      confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
-      soundSuccess.play();
+    if (answeredCount === 7) {
+      const resultBox = document.getElementById("quiz-result");
+      const resultText = document.getElementById("result-text");
+      const soundSuccess = document.getElementById("sound-success");
+      const soundAlert = document.getElementById("sound-alert");
+      resultBox.classList.add("show-result");
+
+      if (score >= 3) {
+        resultText.innerHTML = `💡 Bạn trả lời ${score}/7 câu đúng.<br><b>Nguy cơ cận thị cao!</b> Hãy đi kiểm tra mắt và chăm sóc mắt khoa học.`;
+        resultBox.style.background = "#ffe7e7";
+        resultBox.style.borderLeftColor = "#ff5555";
+        resultBox.classList.add("blink-alert");
+        soundAlert.play();
+      } else {
+        resultText.innerHTML = `🎉 Bạn trả lời ${score}/7 câu đúng.<br>Mắt bạn hiện tại <b>tương đối an toàn</b>! Hãy duy trì thói quen tốt.`;
+        resultBox.style.background = "#e7ffe7";
+        resultBox.style.borderLeftColor = "#55aa55";
+        confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+        soundSuccess.play();
+      }
     }
   }
-}
-</script>
-
-<style>
-#eye-quiz-animated-sound ol li { margin-bottom: 15px; line-height: 1.6; }
-#eye-quiz-animated-sound button { margin-right: 10px; margin-top: 5px; padding: 5px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-#eye-quiz-animated-sound button:hover { opacity: 0.85; }
-#eye-quiz-animated-sound button:disabled { opacity: 0.5; cursor: not-allowed; }
-#eye-quiz-animated-sound button:nth-child(1) { background:#0077aa; color:white; }
-#eye-quiz-animated-sound button:nth-child(2) { background:#aaa; color:white; }
-
-.animated-result {
-  margin-top: 20px;
-  padding: 15px;
-  border-left: 4px solid #0077aa;
-  border-radius: 6px;
-  display: none;
-  transform: translateY(30px) scale(0.8);
-  opacity: 0;
-  transition: all 0.6s ease-out;
-}
-
-.animated-result.show-result {
-  display: block;
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
-
-.blink-alert { animation: blink 1s infinite; }
-@keyframes blink { 0%,50%,100%{opacity:1;}25%,75%{opacity:0.3;} }
-</style>
+  </script>
+</body>
+</html>
   
 <!-- 👥 Thành viên & Lý do chọn đề tài -->
 <section id="team">
