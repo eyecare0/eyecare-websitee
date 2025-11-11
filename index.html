@@ -70,6 +70,45 @@
         ⏱️ Đã 20 phút rồi! Hãy nhìn xa 20 giây để cho mắt nghỉ nhé! 👀
     </div>
     
+    <section id="quiz">
+        <h2>❓ Câu hỏi & Trắc nghiệm</h2>
+        <div id="quiz-check">
+            <h3>🧐 Bạn có nguy cơ cận thị không?</h3>
+            <p>Chọn "Có" (Đúng) hoặc "Không" (Sai) cho mỗi câu hỏi và xem kết quả ngay!</p>
+            <ol id="quiz-list">
+                <li>Khi đọc sách hoặc nhìn điện thoại, bạn thường phải <b>cúi sát</b> xuống mới nhìn rõ.<br>
+                    <button onclick="answerRisk(this, true)">✅ Có</button>
+                    <button onclick="answerRisk(this, false)">❌ Không</button>
+                </li>
+                <li>Bạn thường thấy <b>nhìn bảng ở lớp mờ nhòe</b> hoặc phải nheo mắt mới thấy.<br>
+                    <button onclick="answerRisk(this, true)">✅ Có</button>
+                    <button onclick="answerRisk(this, false)">❌ Không</button>
+                </li>
+                <li>Khi xem tivi hoặc điện thoại lâu, mắt bạn <b>nhức, mỏi hoặc đỏ</b>.<br>
+                    <button onclick="answerRisk(this, true)">✅ Có</button>
+                    <button onclick="answerRisk(this, false)">❌ Không</button>
+                </li>
+                <li>Bạn thường <b>ngồi quá gần màn hình</b> để nhìn rõ.<br>
+                    <button onclick="answerRisk(this, true)">✅ Có</button>
+                    <button onclick="answerRisk(this, false)">❌ Không</button>
+                </li>
+                <li>Khi đọc sách, bạn cảm thấy <b>chữ nhòe hoặc phải đọc lại nhiều lần</b>.<br>
+                    <button onclick="answerRisk(this, true)">✅ Có</button>
+                    <button onclick="answerRisk(this, false)">❌ Không</button>
+                </li>
+                <li>Bạn thấy mắt <b>khô, chảy nước mắt</b> sau khi dùng điện thoại lâu.<br>
+                    <button onclick="answerRisk(this, true)">✅ Có</button>
+                    <button onclick="answerRisk(this, false)">❌ Không</button>
+                </li>
+                <li>Khi ở ngoài trời, bạn cảm thấy <b>khó nhìn vật ở xa</b> (bảng, biển báo…).<br>
+                    <button onclick="answerRisk(this, true)">✅ Có</button>
+                    <button onclick="answerRisk(this, false)">❌ Không</button>
+                </li>
+            </ol>
+            <div id="quiz-risk-result" class="animated-result">
+                <span id="risk-result-text"></span>
+            </div>
+        
     <section id="home" class="intro">
         <h2>🌿 Giới thiệu</h2>
         <div class="intro-content">
@@ -86,7 +125,7 @@
                 </ul>
                 <p>Bằng việc áp dụng các mẹo nhỏ hàng ngày như <b>nghỉ giải lao, bài tập mắt, tư thế học đúng, ánh sáng hợp lý</b>, chúng ta không chỉ bảo vệ mắt mà còn đầu tư cho một tương lai học đường tươi sáng.</p>
                 <p><b>“Mắt sáng – Học tốt – Tương lai rộng mở” 🌈</b></p>
-                <img src="cham-soc-mat.jpg" alt="Hình ảnh minh họa về chăm sóc mắt học đường" style="max-width:100%; height:auto; border-radius:10px; margin:15px 0; display:block; object-fit: cover;">
+                <img src="unnamed.jpg" alt="Hình ảnh minh họa về chăm sóc mắt học đường" style="max-width:100%; height:auto; border-radius:10px; margin:15px 0; display:block; object-fit: cover;">
             </div>
             </div>
     </section>
@@ -218,46 +257,6 @@
             💡 <i>“Chỉ cần 10 phút mỗi ngày, bạn có thể giúp đôi mắt khỏe mạnh và sáng rõ hơn!”</i>
         </div>
     </section>
-
-    <section id="quiz">
-        <h2>❓ Câu hỏi & Trắc nghiệm</h2>
-        <div id="quiz-check">
-            <h3>🧐 Bạn có nguy cơ cận thị không?</h3>
-            <p>Chọn "Có" (Đúng) hoặc "Không" (Sai) cho mỗi câu hỏi và xem kết quả ngay!</p>
-            <ol id="quiz-list">
-                <li>Khi đọc sách hoặc nhìn điện thoại, bạn thường phải <b>cúi sát</b> xuống mới nhìn rõ.<br>
-                    <button onclick="answerRisk(this, true)">✅ Có</button>
-                    <button onclick="answerRisk(this, false)">❌ Không</button>
-                </li>
-                <li>Bạn thường thấy <b>nhìn bảng ở lớp mờ nhòe</b> hoặc phải nheo mắt mới thấy.<br>
-                    <button onclick="answerRisk(this, true)">✅ Có</button>
-                    <button onclick="answerRisk(this, false)">❌ Không</button>
-                </li>
-                <li>Khi xem tivi hoặc điện thoại lâu, mắt bạn <b>nhức, mỏi hoặc đỏ</b>.<br>
-                    <button onclick="answerRisk(this, true)">✅ Có</button>
-                    <button onclick="answerRisk(this, false)">❌ Không</button>
-                </li>
-                <li>Bạn thường <b>ngồi quá gần màn hình</b> để nhìn rõ.<br>
-                    <button onclick="answerRisk(this, true)">✅ Có</button>
-                    <button onclick="answerRisk(this, false)">❌ Không</button>
-                </li>
-                <li>Khi đọc sách, bạn cảm thấy <b>chữ nhòe hoặc phải đọc lại nhiều lần</b>.<br>
-                    <button onclick="answerRisk(this, true)">✅ Có</button>
-                    <button onclick="answerRisk(this, false)">❌ Không</button>
-                </li>
-                <li>Bạn thấy mắt <b>khô, chảy nước mắt</b> sau khi dùng điện thoại lâu.<br>
-                    <button onclick="answerRisk(this, true)">✅ Có</button>
-                    <button onclick="answerRisk(this, false)">❌ Không</button>
-                </li>
-                <li>Khi ở ngoài trời, bạn cảm thấy <b>khó nhìn vật ở xa</b> (bảng, biển báo…).<br>
-                    <button onclick="answerRisk(this, true)">✅ Có</button>
-                    <button onclick="answerRisk(this, false)">❌ Không</button>
-                </li>
-            </ol>
-            <div id="quiz-risk-result" class="animated-result">
-                <span id="risk-result-text"></span>
-            </div>
-        </div>
         
         <h2 style="margin-top: 30px;">🧠 Trắc nghiệm: Kiến thức phòng chống cận thị học đường</h2>
         <p><b>Hãy chọn đáp án đúng nhất cho mỗi câu hỏi nhé!</b></p>
